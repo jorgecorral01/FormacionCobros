@@ -1,4 +1,4 @@
-﻿using Cobros.Business.Dtos;
+﻿using Charges.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -17,10 +17,10 @@ namespace Chargues.Repository.Service.Client {
         public virtual async Task<bool> AddCharge(Charge newCharge) {
             string requestUri = "http://localhost:10001/api/charges/add";
             var content = GivenAHttpContent(newCharge, requestUri);
-            var aa = true;
-            var bbb = await client.PostAsync(requestUri, content);
-            var ccc = bbb.Content;
-            return  aa ;
+            var result = true;
+            //var needResult = await client.PostAsync(requestUri, content);      //TODO                  
+            await Task.Delay(1);
+            return result;
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

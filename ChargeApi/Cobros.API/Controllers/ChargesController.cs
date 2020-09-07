@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Charges.Business.Dtos;
 using Cobros.API.Factories;
-using Cobros.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cobros.API.Controllers {

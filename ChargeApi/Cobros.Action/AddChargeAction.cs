@@ -1,5 +1,5 @@
-﻿using Chargues.Repository.Service.Client;
-using Cobros.Business.Dtos;
+﻿using Charges.Business.Dtos;
+using Chargues.Repository.Service.Client;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

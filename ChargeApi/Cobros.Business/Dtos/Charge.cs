@@ -1,4 +1,4 @@
-﻿namespace Cobros.Business.Dtos {
+﻿namespace Charges.Business.Dtos {
     public class Charge {
         public string Description { get; set; }
         public int Amount { get; set; }

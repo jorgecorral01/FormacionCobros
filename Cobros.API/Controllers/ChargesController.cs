@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cobros.API.Factories;
 using Cobros.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,20 @@ namespace Cobros.API.Controllers {
     [ApiController]
     public class ChargesController : ControllerBase {
 
+        private readonly ActionFactory actionFactory;
+
+        public ChargesController (ActionFactory actionFactory) {
+            this.actionFactory = actionFactory;
+        }
+
         // POST api/charges
         [HttpPost]
-        public ActionResult Post( Charge charge) {
-            return Ok();
+        public ActionResult Post(Charge charge) {
+            bool v = actionFactory.CreateAddChargeAction().Execute(charge);
+            if ( v) {
+                return Ok();
+            }
+            throw new Exception("For TODO");
         }
 
 

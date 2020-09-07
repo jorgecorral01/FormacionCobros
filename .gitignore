@@ -248,3 +248,7 @@ Test/Cobros.Action.Test/bin/Debug/netcoreapp3.1/Castle.Core.dll
 Test/Cobros.Action.Test/bin/Debug/netcoreapp3.1/Charges.Repository.Service.Client.dll
 Test/Cobros.Action.Test/bin/Debug/netcoreapp3.1/Charges.Repository.Service.Client.pdb
 Test/Cobros.Action.Test/bin/Debug/netcoreapp3.1/NSubstitute.dll
+Cobros.API/bin/Debug/netcoreapp2.2/Charges.Repository.Service.Client.dll
+Cobros.API/bin/Debug/netcoreapp2.2/Charges.Repository.Service.Client.pdb
+Cobros.API/bin/Debug/netcoreapp2.2/Cobros.Action.dll
+Cobros.API/bin/Debug/netcoreapp2.2/Cobros.Action.pdb

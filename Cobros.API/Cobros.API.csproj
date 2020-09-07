@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cobros.Action\Cobros.Action.csproj" />
     <ProjectReference Include="..\Cobros.Business\Cobros.Business.csproj" />
   </ItemGroup>
 

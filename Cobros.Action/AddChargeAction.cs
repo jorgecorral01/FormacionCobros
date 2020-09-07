@@ -1,6 +1,8 @@
 ﻿using Chargues.Repository.Service.Client;
 using Cobros.Business.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace Cobros.Action.Test {
     public class AddChargeAction {
@@ -13,8 +15,8 @@ namespace Cobros.Action.Test {
             this.clientChargeRepository = clientChargeRepository;
         }
 
-        public bool Execute(Charge newCharge) {            
-            return clientChargeRepository.AddCharge(newCharge); 
+        public async Task<bool> Execute(Charge newCharge) {            
+            return await clientChargeRepository.AddCharge(newCharge); 
         }
     }
 }

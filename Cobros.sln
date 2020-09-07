@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobros.Action.Test", "Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobros.Action", "Cobros.Action\Cobros.Action.csproj", "{CA2D292E-8487-438D-BA83-5088D3CA44AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charges.Repository.Service.Client", "Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj", "{7AC1D2DB-7789-4D56-9C96-657C90B3620B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{CA2D292E-8487-438D-BA83-5088D3CA44AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA2D292E-8487-438D-BA83-5088D3CA44AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA2D292E-8487-438D-BA83-5088D3CA44AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC1D2DB-7789-4D56-9C96-657C90B3620B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC1D2DB-7789-4D56-9C96-657C90B3620B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC1D2DB-7789-4D56-9C96-657C90B3620B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC1D2DB-7789-4D56-9C96-657C90B3620B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

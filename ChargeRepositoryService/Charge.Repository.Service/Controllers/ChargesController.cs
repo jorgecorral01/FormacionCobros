@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Charge.Repository.Service.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Charge.Repository.Service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase {
+
+        // POST api/values
+        [Route("add")]
+        [HttpPost]
+        public void Add(RepositoryCharge charge) {
+            var a = 1;
+        }
+
+
+
+
+
+
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get() {
@@ -18,12 +33,7 @@ namespace Charge.Repository.Service.Controllers {
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id) {
             return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value) {
-        }
+        }       
 
         // PUT api/values/5
         [HttpPut("{id}")]

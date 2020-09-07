@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using Cobros.Business.Dtos;
 
 namespace Cobros.Controllers.Test {
-    public class CobrosControllerShould {
+    public class ChargesControllerShould {
         [Test]
-        public async Task given_data_for_add_new_charge_we_obtein_a_ok_response() {
+        public async Task given_data_for_add_new_charge_we_obtein_an_ok_response() {
             var newCharge = new Charge {Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
             HttpClient client = new HttpClient();
             var requestUri = "http://localhost:10000/api/charges";

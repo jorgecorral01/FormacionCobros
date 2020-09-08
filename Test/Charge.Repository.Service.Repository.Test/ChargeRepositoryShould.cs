@@ -12,7 +12,7 @@ namespace Charge.Repository.Service.Repository.Test {
         [Test]
         public async Task given_data_for_add_new_charge_we_can_recover_it() {
             var newCharge = new RepositoryCharge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
-            var chargeRepository = new ChargeRepository();
+            var chargeRepository = new ChargeRepositoryEntity();
 
             var result = await chargeRepository.Add(newCharge);
 

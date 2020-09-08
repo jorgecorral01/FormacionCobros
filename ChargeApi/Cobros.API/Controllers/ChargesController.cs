@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Charges.API.swagger;
 using Charges.Business.Dtos;
 using Cobros.API.Factories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 
 namespace Cobros.API.Controllers {
     [Route("api/[controller]")]
@@ -12,6 +15,10 @@ namespace Cobros.API.Controllers {
     public class ChargesController : ControllerBase {
 
         private readonly ActionFactory actionFactory;
+
+        public static void Convention(ApiVersioningOptions options) {
+            options.Conventions.Controller<ChargesController>().HasApiVersions(ApiVersioning.Versions());
+        }
 
         public ChargesController (ActionFactory actionFactory) {
             this.actionFactory = actionFactory;
@@ -25,34 +32,6 @@ namespace Cobros.API.Controllers {
                 return Ok();
             }
             throw new Exception("For TODO");
-        }
-
-
-
-
-
-
-
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get() {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id) {
-            return "value";
-        }        
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value) {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id) {
         }
     }
 }

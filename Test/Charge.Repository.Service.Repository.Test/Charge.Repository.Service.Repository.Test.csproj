@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Charge.Repository.Service.Repository\Charge.Repository.Service.Repository.csproj" />
     <ProjectReference Include="..\..\ChargeRepositoryService\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj" />
     <ProjectReference Include="..\..\ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />
   </ItemGroup>

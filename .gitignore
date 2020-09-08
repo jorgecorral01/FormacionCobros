@@ -902,3 +902,4 @@ ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/bin/Debug/ne
 ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/bin/Debug/netcoreapp3.1/Charge.Repository.Service.Repository.Entity.runtimeconfig.dev.json
 ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/bin/Debug/netcoreapp3.1/Charge.Repository.Service.Repository.Entity.runtimeconfig.json
 ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/bin/Debug/netcoreapp3.1/Charge.Repository.Service.Repository.pdb
+Test/Charge.Repository.Service.Repository.Test/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.InMemory.dll

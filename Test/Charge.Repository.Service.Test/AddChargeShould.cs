@@ -9,13 +9,13 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Charge.Repository.Service.Test {
+namespace Charge.Repository.Service.Controller.Test {
     public class AddChargeShould {
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_an_ok_response() {
             var newCharge = new RepositoryCharge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
             HttpClient client = new HttpClient();
-            var requestUri = "http://localhost:10000/api/charges/add";
+            var requestUri = "http://localhost:10001/api/charges/add";
             var content = GivenAHttpContent(newCharge, requestUri);
 
             var result = await client.PostAsync(requestUri, content);

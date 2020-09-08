@@ -12,11 +12,16 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />    
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj" />
+    <ProjectReference Include="..\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

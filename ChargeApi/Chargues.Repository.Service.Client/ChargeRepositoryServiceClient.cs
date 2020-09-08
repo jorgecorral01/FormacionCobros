@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,10 @@ namespace Chargues.Repository.Service.Client {
 
         public virtual async Task<bool> AddCharge(Charge newCharge) {
             string requestUri = "http://localhost:10001/api/charges/add";
-            var content = GivenAHttpContent(newCharge, requestUri);
-            var result = true;
-            //var needResult = await client.PostAsync(requestUri, content);      //TODO                  
-            await Task.Delay(1);
-            return result;
+            var content = GivenAHttpContent(newCharge, requestUri);            
+            var result = await client.PostAsync(requestUri, content);      
+            if (result.StatusCode  == HttpStatusCode.OK) return true;
+            throw new Exception("TODO");
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

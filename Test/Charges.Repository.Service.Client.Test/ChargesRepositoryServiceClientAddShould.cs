@@ -16,8 +16,8 @@ namespace Charges.Repository.Service.Client.Test {
         [SetUp]
         public void Setup() {
         }
-
-        [Ignore ("wip: i cant put response message: true ")]
+               
+        [Ignore ("client.PostAsync i can do return reponse Ok")]
         [Test]
         //async Task
         public void given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
@@ -25,7 +25,7 @@ namespace Charges.Repository.Service.Client.Test {
             string requestUri = "http://localhost:10001/api/charges/add";
             var newCharge = new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
             var content = GivenAHttpContent(newCharge, requestUri);
-            client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("true")});
+            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceClient(client);
 
             var result =  chargeRepositoryServiceClient.AddCharge(newCharge);

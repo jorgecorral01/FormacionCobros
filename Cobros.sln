@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charge.Activity.Service.Repository.Test", "Test\ChargeActivityService\Charge.Activity.Service.Repository.Test\Charge.Activity.Service.Repository.Test.csproj", "{0BD427E2-B0EB-4EDB-B251-8A83BD486DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charge.Activity.Service.Repository", "ChargeActivityService\Charge.Activity.Service.Repository\Charge.Activity.Service.Repository.csproj", "{38715842-F6A4-4D60-AC92-529D358A663C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charge.Activity.Service.Repository.Entity", "ChargeActivityService\Charge.Activity.Service.Repository\Charge.Activity.Service.Repository.Entity.csproj", "{38715842-F6A4-4D60-AC92-529D358A663C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

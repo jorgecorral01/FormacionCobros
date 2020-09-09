@@ -1,8 +1,9 @@
-﻿using Charge.Repository.Service.Repository.Entity.Models;
+﻿using Charge.Activity.Service.Repository.Entity;
+using Charge.Repository.Service.Repository.Entity.Models;
 using System;
 
 namespace Charge.Activity.Service.Repository {
-    public class ChargeActivityServiceRepository {
+    public class ChargeActivityServiceRepository : IChargeActivityRepository {
         public ChargeActivityServiceRepository() {
         }
 

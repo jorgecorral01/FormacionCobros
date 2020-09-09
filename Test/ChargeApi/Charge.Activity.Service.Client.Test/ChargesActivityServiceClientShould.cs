@@ -19,7 +19,7 @@ namespace Charge.Activity.Service.Client.Test {
         //async Task
         public void given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
             HttpClient client = Substitute.For<HttpClient>();
-            string requestUri = "http://localhost:10002/api/chargesActivity/add";
+            string requestUri = "http://localhost:10002/api/chargeActivity/add";
             var identifier = "anyIdentifier";
             var content = GivenAHttpContent(identifier, requestUri);
             client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK));

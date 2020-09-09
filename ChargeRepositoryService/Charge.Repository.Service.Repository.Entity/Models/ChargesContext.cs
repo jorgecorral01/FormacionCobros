@@ -35,8 +35,6 @@ namespace Charge.Repository.Service.Repository.Entity.Models
             {
                 entity.HasKey(e => e.IdActivity);
 
-                entity.Property(e => e.IdActivity).ValueGeneratedNever();
-
                 entity.Property(e => e.DateCreated)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");

@@ -97,7 +97,7 @@ namespace Charge.Repository.Service {
                 })
                 .AddAuthorization()
                 .AddFormatterMappings()
-                //.AddJsonFormatters()
+                .AddJsonFormatters()
                 .AddXmlSerializerFormatters()
                 .AddCors()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

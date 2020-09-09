@@ -1799,3 +1799,11 @@ ChargeActivityService/Charge.Activity.Service/bin/Debug/netcoreapp2.2/Charge.Act
 ChargeActivityService/Charge.Activity.Service/bin/Debug/netcoreapp2.2/Properties/launchSettings.json
 .vs/Cobros/v16/TestStore/4/000.testlog
 .vs/Cobros/v16/TestStore/4/testlog.manifest
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/Castle.Core.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/Charge.Activity.Service.Client.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/Charge.Activity.Service.Client.pdb
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/FluentAssertions.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/NSubstitute.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/System.Configuration.ConfigurationManager.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/System.Security.Cryptography.ProtectedData.dll
+Test/ChargeApi/Charge.Activity.Service.Client.Test/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll

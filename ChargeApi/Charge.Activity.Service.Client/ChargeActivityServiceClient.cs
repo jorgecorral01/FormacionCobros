@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Charge.Activity.Service.Client {
@@ -12,9 +14,22 @@ namespace Charge.Activity.Service.Client {
             this.httpClient = httpClient;
         }
 
-        public virtual bool NotifyNewCharge(string identifier) {
-            var TODO = true; // TODO
-            return TODO;
+        public virtual async Task<bool> NotifyNewCharge(string identifier) {
+            string requestUri = "http://localhost:10002/api/charges/Activity/add";
+            var content = GivenAHttpContent(identifier, requestUri);
+            var result = await httpClient.PostAsync(requestUri, content);
+            if(result.StatusCode == HttpStatusCode.OK) return true;
+            throw new Exception("TODO");
+        }
+
+        private static HttpContent GivenAHttpContent(string identifier, string requestUri) {
+            HttpContent content = new StringContent(identifier, Encoding.UTF8, "application/json");
+            HttpRequestMessage request = new HttpRequestMessage {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(requestUri),
+                Content = content
+            };
+            return content;
         }
     }
 }

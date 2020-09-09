@@ -5,16 +5,7 @@
 .vs/Cobros/v16/TestStore/0/testlog.manifest
 .vs/Cobros/v16/TestStore/1/000.testlog
 .vs/Cobros/v16/TestStore/1/testlog.manifest
-Cobros.API/bin/Debug/netcoreapp2.2/appsettings.Development.json
-Cobros.API/bin/Debug/netcoreapp2.2/appsettings.json
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.API.deps.json
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.API.dll
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.API.pdb
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.API.runtimeconfig.dev.json
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.API.runtimeconfig.json
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.Business.dll
-Cobros.API/bin/Debug/netcoreapp2.2/Cobros.Business.pdb
-Cobros.API/bin/Debug/netcoreapp2.2/Properties/launchSettings.json
+Cobros.API/bin/Debug/
 Cobros.API/obj/Cobros.API.csproj.nuget.dgspec.json
 Cobros.API/obj/Cobros.API.csproj.nuget.g.props
 Cobros.API/obj/Cobros.API.csproj.nuget.g.targets

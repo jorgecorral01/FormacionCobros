@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ChargeApi\Charge.Activity.Service.Client\Charge.Activity.Service.Client.csproj" />
     <ProjectReference Include="..\..\ChargeApi\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj" />
     <ProjectReference Include="..\..\ChargeApi\Cobros.Action\Charges.Action.csproj" />
     <ProjectReference Include="..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />

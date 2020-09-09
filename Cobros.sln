@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository.Test", "Test\Charge.Repository.Service.Repository.Test\Charge.Repository.Service.Repository.Test.csproj", "{4CF6E9AE-2513-4B75-A204-7AA1D71C4976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charge.Repository.Service.Repository.Entity", "ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj", "{15281051-A810-4AE2-9530-D52F9227675F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository.Entity", "ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj", "{15281051-A810-4AE2-9530-D52F9227675F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository", "ChargeRepositoryService\Charge.Repository.Service.Repository\Charge.Repository.Service.Repository.csproj", "{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Client", "ChargeApi\Charge.Activity.Service.Client\Charge.Activity.Service.Client.csproj", "{37FE17C5-B05B-43F1-B559-9C063988380F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37FE17C5-B05B-43F1-B559-9C063988380F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FE17C5-B05B-43F1-B559-9C063988380F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FE17C5-B05B-43F1-B559-9C063988380F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FE17C5-B05B-43F1-B559-9C063988380F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{4CF6E9AE-2513-4B75-A204-7AA1D71C4976} = {2DE2283A-6E37-459F-9E51-B3388AAD2ED4}
 		{15281051-A810-4AE2-9530-D52F9227675F} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
 		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
+		{37FE17C5-B05B-43F1-B559-9C063988380F} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F80D850-3F20-4972-88C7-4D6956DC2E09}

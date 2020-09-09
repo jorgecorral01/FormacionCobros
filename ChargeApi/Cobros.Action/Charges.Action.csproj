@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Charge.Activity.Service.Client\Charge.Activity.Service.Client.csproj" />
     <ProjectReference Include="..\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj" />
     <ProjectReference Include="..\Cobros.Business\Charges.Business.csproj" />
   </ItemGroup>

@@ -15,7 +15,7 @@ namespace Charge.Activity.Service.Client {
         }
 
         public virtual async Task<bool> NotifyNewCharge(string identifier) {
-            string requestUri = "http://localhost:10002/api/charges/Activity/add";
+            string requestUri = "http://localhost:10002/api/chargesActivity/add";
             var content = GivenAHttpContent(identifier, requestUri);
             var result = await httpClient.PostAsync(requestUri, content);
             if(result.StatusCode == HttpStatusCode.OK) return true;

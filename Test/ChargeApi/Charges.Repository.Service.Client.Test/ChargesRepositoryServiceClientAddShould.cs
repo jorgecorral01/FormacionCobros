@@ -17,7 +17,7 @@ namespace Charges.Repository.Service.Client.Test {
         public void Setup() {
         }
                
-        [Ignore ("client.PostAsync i can do return reponse Ok")]
+        [Ignore ("TODO client.PostAsync i can do return reponse Ok")]
         [Test]
         //async Task
         public void given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {

@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ChargeApi\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj" />
-    <ProjectReference Include="..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />
+    <ProjectReference Include="..\..\..\ChargeApi\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj" />
+    <ProjectReference Include="..\..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />
   </ItemGroup>
 
 </Project>

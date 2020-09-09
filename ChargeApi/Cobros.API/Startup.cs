@@ -40,7 +40,8 @@ namespace Cobros.API {
 
             services.AddSingleton(new ActionFactory());
             services.AddSingleton(new ChargeRepositoryServiceClientFactory());
-
+            services.AddSingleton(new ChargeActivityServiceClientFactory());
+            
             ConfigureSwagger(services);
         }
 

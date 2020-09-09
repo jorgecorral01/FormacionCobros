@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />
+    <ProjectReference Include="..\..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />
   </ItemGroup>
 
 </Project>

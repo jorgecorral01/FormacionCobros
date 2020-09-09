@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ChargeRepositoryService\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj" />
+    <ProjectReference Include="..\..\..\ChargeRepositoryService\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj" />
   </ItemGroup>
 </Project>

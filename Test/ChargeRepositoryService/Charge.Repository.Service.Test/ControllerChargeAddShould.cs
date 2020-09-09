@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Charge.Repository.Service.Controller.Test {
-    public class AddChargeShould {
+    public class ControllerChargeAddShould {
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_an_ok_response() {
             var newCharge = new RepositoryCharge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };

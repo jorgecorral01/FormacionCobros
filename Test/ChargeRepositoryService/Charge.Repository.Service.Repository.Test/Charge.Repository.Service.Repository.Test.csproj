@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
@@ -15,10 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ChargeApi\Charge.Activity.Service.Client\Charge.Activity.Service.Client.csproj" />
-    <ProjectReference Include="..\..\ChargeApi\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj" />
-    <ProjectReference Include="..\..\ChargeApi\Cobros.Action\Charges.Action.csproj" />
-    <ProjectReference Include="..\..\ChargeApi\Cobros.Business\Charges.Business.csproj" />
+    <ProjectReference Include="..\..\..\ChargeRepositoryService\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj" />
+    <ProjectReference Include="..\..\..\ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />
   </ItemGroup>
 
 </Project>

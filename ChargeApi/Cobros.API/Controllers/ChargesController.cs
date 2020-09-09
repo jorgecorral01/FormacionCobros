@@ -26,7 +26,7 @@ namespace Cobros.API.Controllers {
 
         // POST api/charges
         [HttpPost]
-        public async Task<ActionResult> Post(Charge charge) {
+        public async Task<ActionResult> Post(Charges.Business.Dtos.Charge charge) {
             bool v = await actionFactory.CreateAddChargeAction().Execute(charge);
             if ( v) {
                 return Ok();

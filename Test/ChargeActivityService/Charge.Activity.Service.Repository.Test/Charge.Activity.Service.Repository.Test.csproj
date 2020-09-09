@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ChargeActivityService\Charge.Activity.Service.Repository\Charge.Activity.Service.Repository.csproj" />
     <ProjectReference Include="..\..\..\ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj" />
   </ItemGroup>
 

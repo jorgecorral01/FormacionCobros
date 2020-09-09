@@ -26,23 +26,6 @@ namespace Charge.Activity.Service.Repository.Test {
             result.Should().Be(true);
             chargesContext.Activities.Select(item => item.Identifier == identifier).ToList().Should().HaveCount(1);
 
-        }
-
-        private class ChargeActivityServiceRepository {
-            public ChargeActivityServiceRepository() {
-            }
-
-            public ChargeActivityServiceRepository(ChargesContext chargesContext) {
-                ChargesContext = chargesContext;
-            }
-
-            public ChargesContext ChargesContext { get; }
-
-            internal bool Add(string identifier) {
-                ChargesContext.Activities.Add(new Activities { Identifier = identifier });
-                ChargesContext.SaveChanges();
-                return true;
-            }
-        }
+        }        
     }
 }

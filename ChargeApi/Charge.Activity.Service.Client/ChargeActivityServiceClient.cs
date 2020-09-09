@@ -15,16 +15,23 @@ namespace Charge.Activity.Service.Client {
             this.httpClient = httpClient;
         }
 
-        public virtual async Task<bool> NotifyNewCharge(string identifier) {
+        public virtual async Task<bool> NotifyNewCharge(IdentifierDto identifier) {
             string requestUri = "http://localhost:10002/api/ChargeActivity/add";
             var content = GivenAHttpContent(identifier, requestUri);
             var result = await httpClient.PostAsync(requestUri, content);
             if(result.StatusCode == HttpStatusCode.OK) return true;
             return false;
         }
+        
+        public virtual async Task<bool> UpdateNotifyCharge(IdentifierDto identifierDto) {
+            string requestUri = "http://localhost:10002/api/chargeActivity/update";                       
+            var content = GivenAHttpContent(identifierDto, requestUri);                        
+            var result = await httpClient.PostAsync(requestUri, content);
+            if(result.StatusCode == HttpStatusCode.OK) return true;
+            return false;
+        }
 
-        private static HttpContent GivenAHttpContent(string identifier, string requestUri) {
-            var identifierDto = new IdentifierDto { identifier = identifier };
+        private static HttpContent GivenAHttpContent(IdentifierDto identifierDto, string requestUri) {
             string json = JsonConvert.SerializeObject(identifierDto, Formatting.Indented);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpRequestMessage request = new HttpRequestMessage {
@@ -33,10 +40,6 @@ namespace Charge.Activity.Service.Client {
                 Content = content
             };
             return content;
-        }
-
-        public virtual bool UpdateNotifyCharge(string identifier, bool addResult) {
-            throw new NotImplementedException();
         }
     }
 }

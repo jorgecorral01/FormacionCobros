@@ -21,14 +21,15 @@ namespace Charges.Action.Test {
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
             var addResult = true;
             clientChargeRepository.AddCharge(newCharge).Returns(addResult);
-            clientActivityService.UpdateNotifyCharge(newCharge.identifier, addResult).Returns(true);
+            var identifierDto = new IdentifierDto { identifier = newCharge.identifier, Result = addResult };
+            clientActivityService.UpdateNotifyCharge(identifierDto).Returns(true);
 
             var result = await addChargeAction.Execute(newCharge);
 
             result.Should().Be(true);
-            clientActivityService.Received(1).NotifyNewCharge(newCharge.identifier);
+            await clientActivityService.Received(1).NotifyNewCharge(identifierDto);
             await clientChargeRepository.Received(1).AddCharge(newCharge);
-            clientActivityService.Received(1).UpdateNotifyCharge(newCharge.identifier, addResult);
+            await clientActivityService.Received(1).UpdateNotifyCharge(identifierDto);
         }
     }
 }

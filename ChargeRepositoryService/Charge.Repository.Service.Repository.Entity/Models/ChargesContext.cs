@@ -15,6 +15,7 @@ namespace Charge.Repository.Service.Repository.Entity.Models
         {
         }
 
+        public virtual DbSet<Activities> Activities { get; set; }
         public virtual DbSet<Charges> Charges { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,6 +29,24 @@ namespace Charge.Repository.Service.Repository.Entity.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity<Activities>(entity =>
+            {
+                entity.HasKey(e => e.IdActivity);
+
+                entity.Property(e => e.IdActivity).ValueGeneratedNever();
+
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasColumnName("identifier")
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Charges>(entity =>
             {
                 entity.HasKey(e => e.IdCharge);
@@ -48,10 +67,6 @@ namespace Charge.Repository.Service.Repository.Entity.Models
                     .IsRequired()
                     .HasMaxLength(50);
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

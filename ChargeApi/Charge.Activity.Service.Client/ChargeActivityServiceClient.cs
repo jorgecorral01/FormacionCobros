@@ -34,5 +34,9 @@ namespace Charge.Activity.Service.Client {
             };
             return content;
         }
+
+        public virtual bool UpdateNotifyCharge(string identifier, bool addResult) {
+            throw new NotImplementedException();
+        }
     }
 }

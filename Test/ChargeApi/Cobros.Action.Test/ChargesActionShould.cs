@@ -19,12 +19,16 @@ namespace Charges.Action.Test {
             var clientActivityService = Substitute.For<ChargeActivityServiceClient>();
             clientChargeRepository.AddCharge(newCharge).Returns(true);
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
+            var addResult = true;
+            clientChargeRepository.AddCharge(newCharge).Returns(addResult);
+            clientActivityService.UpdateNotifyCharge(newCharge.identifier, addResult).Returns(true);
 
             var result = await addChargeAction.Execute(newCharge);
 
             result.Should().Be(true);
-            await clientChargeRepository.Received(1).AddCharge(newCharge);
             clientActivityService.Received(1).NotifyNewCharge(newCharge.identifier);
+            await clientChargeRepository.Received(1).AddCharge(newCharge);
+            clientActivityService.Received(1).UpdateNotifyCharge(newCharge.identifier, addResult);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Charges.Action {
         public async Task<bool> Execute(Business.Dtos.Charge newCharge) {
             await clientActivityService.NotifyNewCharge ( new IdentifierDto { identifier = newCharge.identifier });
             var resultAdd =   await clientChargeRepository.AddCharge(newCharge);
-            var identifierDto = new IdentifierDto { identifier = newCharge.identifier, Result = resultAdd };
+            var identifierDto = new IdentifierDto { identifier = newCharge.identifier, AddResult = resultAdd };
             return await clientActivityService.UpdateNotifyCharge(identifierDto);
         }
     }

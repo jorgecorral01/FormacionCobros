@@ -1,15 +1,16 @@
 ﻿using Charge.Activity.Service.Bussines.Dtos;
 using Charge.Activity.Service.Repository;
+using Charge.Activity.Service.Repository.Entity;
 using System;
 
 namespace Charge.Activity.Service.Action {
     public class UpdateActivityAction {
-        private ChargeActivityServiceRepository chargeActivityServiceRepository;
+        private IChargeActivityRepository chargeActivityServiceRepository;
 
-        public UpdateActivityAction() {
-        }
+        //public UpdateActivityAction() {
+        //}
 
-        public UpdateActivityAction(ChargeActivityServiceRepository chargeActivityServiceRepository) {
+        public UpdateActivityAction(IChargeActivityRepository chargeActivityServiceRepository) {
             this.chargeActivityServiceRepository = chargeActivityServiceRepository;
         }
 

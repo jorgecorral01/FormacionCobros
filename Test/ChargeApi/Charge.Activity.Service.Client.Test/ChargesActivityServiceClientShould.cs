@@ -22,7 +22,7 @@ namespace Charge.Activity.Service.Client.Test {
             string requestUri = "http://localhost:10002/api/chargeActivity/add";
             var identifier = "anyIdentifier";
             var addResult = true;
-            var identifierDto = new IdentifierDto { identifier = identifier, Result = addResult };
+            var identifierDto = new IdentifierDto { identifier = identifier, AddResult = addResult };
             var content = GivenAHttpContent(identifierDto, requestUri);
             client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeActivityServiceClient = new ChargeActivityServiceClient(client);
@@ -41,7 +41,7 @@ namespace Charge.Activity.Service.Client.Test {
             string requestUri = "http://localhost:10002/api/chargeActivity/update";
             var identifier = "anyIdentifier";
             var addResult = true;
-            var identifierDto = new IdentifierDto { identifier = identifier, Result = addResult };
+            var identifierDto = new IdentifierDto { identifier = identifier, AddResult = addResult };
             var content = GivenAHttpContent(identifierDto, requestUri);
             client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeActivityServiceClient = new ChargeActivityServiceClient(client);

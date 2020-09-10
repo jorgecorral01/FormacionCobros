@@ -21,7 +21,7 @@ namespace Charges.Action.Test {
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
             var addResult = true;
             clientChargeRepository.AddCharge(newCharge).Returns(addResult);
-            var identifierDto = new IdentifierDto { identifier = newCharge.identifier, Result = addResult };
+            var identifierDto = new IdentifierDto { identifier = newCharge.identifier, AddResult = addResult };
             clientActivityService.UpdateNotifyCharge(identifierDto).Returns(true);
 
             var result = await addChargeAction.Execute(newCharge);

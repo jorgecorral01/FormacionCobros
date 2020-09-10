@@ -26,7 +26,7 @@ namespace Charge.Activity.Service.Client {
         public virtual async Task<bool> UpdateNotifyCharge(IdentifierDto identifierDto) {
             string requestUri = "http://localhost:10002/api/chargeActivity/update";                       
             var content = GivenAHttpContent(identifierDto, requestUri);                        
-            var result = await httpClient.PostAsync(requestUri, content);
+            var result = await httpClient.PutAsync(requestUri, content);
             if(result.StatusCode == HttpStatusCode.OK) return true;
             return false;
         }

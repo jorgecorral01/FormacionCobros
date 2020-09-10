@@ -35,7 +35,7 @@ namespace Charge.Activity.Service.Controllers {
         [Route("update")]
         [HttpPut]
         public ActionResult Put(IdentifierDto identifier) {
-            if(repositoriesFactory.GetRespository().Update(identifier)) {
+            if(ActionFactory.GetUpdateActivityAction(repositoriesFactory).Execute(identifier)) {             
                 return Ok();
             }
             throw new Exception("TODO");            

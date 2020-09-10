@@ -19,7 +19,7 @@ namespace Charge.Activity.Service.Controller.Test {
         public async Task given_an_identifier_add_new_activity_charge_we_obtein_an_ok_response() {
             HttpClient client = new HttpClient();
             var requestUri = "http://localhost:10002/api/ChargeActivity/add";
-            var identifier = new IdentifierDto { identifier = "any identifier", AddResult = "true" };
+            var identifier = new IdentifierDto { identifier = "any identifier", AddResult = true };
             var content = GivenAHttpContent(identifier, requestUri);
 
             var result = await client.PostAsync(requestUri, content);
@@ -31,7 +31,7 @@ namespace Charge.Activity.Service.Controller.Test {
         public async Task given_an_identifier_for_update_activity_charge_we_obtein_an_ok_response() {
             HttpClient client = new HttpClient();
             var requestUri = "http://localhost:10002/api/ChargeActivity/update";
-            var identifier = new IdentifierDto { identifier = "any identifier", AddResult = "true" };
+            var identifier = new IdentifierDto { identifier = "any identifier", AddResult = true };
             var content = GivenAHttpContent(identifier, requestUri);
 
             var result = await client.PutAsync(requestUri, content);

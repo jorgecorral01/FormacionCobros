@@ -35,9 +35,11 @@ namespace Charge.Repository.Service.Repository.Entity.Models
             {
                 entity.HasKey(e => e.IdActivity);
 
-                entity.Property(e => e.DateCreated)
+                entity.Property(e => e.DateReception)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DateSend).HasColumnType("datetime");
 
                 entity.Property(e => e.Identifier)
                     .IsRequired()

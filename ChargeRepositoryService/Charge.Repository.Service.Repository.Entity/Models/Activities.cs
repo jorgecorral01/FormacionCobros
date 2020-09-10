@@ -7,6 +7,8 @@ namespace Charge.Repository.Service.Repository.Entity.Models
     {
         public int IdActivity { get; set; }
         public string Identifier { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime DateReception { get; set; }
+        public DateTime? DateSend { get; set; }
+        public bool? AddResult { get; set; }
     }
 }

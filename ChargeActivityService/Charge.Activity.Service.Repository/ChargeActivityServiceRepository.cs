@@ -24,11 +24,15 @@ namespace Charge.Activity.Service.Repository {
         public virtual bool Update(Charge.Activity.Service.Bussines.Dtos.IdentifierDto identifierDto) {
             var activity = ChargesContext.Activities.Where(item => item.Identifier == identifierDto.identifier).FirstOrDefault();
             if(activity != null) {
-                activity.DateSend = DateTime.Now;
-                activity.AddResult = identifierDto.AddResult;
-                ChargesContext.SaveChanges();
+                UpdateValues(identifierDto, activity);
             }
             return true;
+        }
+
+        private void UpdateValues(IdentifierDto identifierDto, Activities activity) {
+            activity.DateSend = DateTime.Now;
+            activity.AddResult = identifierDto.AddResult;
+            ChargesContext.SaveChanges();
         }
     }
 }

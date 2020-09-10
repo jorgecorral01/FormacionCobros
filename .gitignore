@@ -17,7 +17,7 @@ ChargeActivityService/Charge.Activity.Service/bin
 ChargeActivityService/Charge.Activity.Service/obj
 Test/ChargeActivityService/Charge.Activity.Service.Controller.Test/bin/
 Test/ChargeActivityService/Charge.Activity.Service.Controller.Test/obj/
-.vs/Cobros
+.vs/Cobros/
 Cobros.API/obj/Cobros.API.csproj.nuget.dgspec.json
 Cobros.API/obj/Cobros.API.csproj.nuget.g.props
 Cobros.API/obj/Cobros.API.csproj.nuget.g.targets

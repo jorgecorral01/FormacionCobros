@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Charge.Activity.Service.Dtos;
 using Charge.Activity.Service.Factories;
 using Charge.Activity.Service.swagger;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
 namespace Charge.Activity.Service.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class ChargeActivityController : ControllerBase {
+    public partial class ChargeActivityController : ControllerBase {
         private readonly RepositoriesFactory repositoriesFactory;
 
         public static void Convention(ApiVersioningOptions options) {
@@ -30,8 +31,11 @@ namespace Charge.Activity.Service.Controllers {
             throw new Exception("TODO");
         }
 
-        public class IdentifierDto {
-            public string identifier;
+        // PUT api/<ValuesController>/5
+        [Route("update")]
+        [HttpPut]
+        public ActionResult Put(IdentifierDto identifier) {
+            return Ok();
         }
     }
 }

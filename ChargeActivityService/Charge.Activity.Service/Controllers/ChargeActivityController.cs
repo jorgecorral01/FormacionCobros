@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Charge.Activity.Service.Dtos;
+using Charge.Activity.Service.Bussines.Dtos;
 using Charge.Activity.Service.Factories;
 using Charge.Activity.Service.swagger;
 using Microsoft.AspNetCore.Mvc;

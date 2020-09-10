@@ -1,4 +1,4 @@
-using Charge.Activity.Service.Dtos;
+using Charge.Activity.Service.Bussines.Dtos;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;

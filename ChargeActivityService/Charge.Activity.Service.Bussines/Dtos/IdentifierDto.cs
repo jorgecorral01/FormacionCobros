@@ -1,4 +1,4 @@
-﻿namespace Charge.Activity.Service.Dtos {
+﻿namespace Charge.Activity.Service.Bussines.Dtos {
     public class IdentifierDto {
         public string identifier;
 

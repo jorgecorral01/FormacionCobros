@@ -14,7 +14,7 @@ namespace Charge.Activity.Service.Action {
         }
 
         public bool Execute(IdentifierDto identifierDto) {            
-            return chargeActivityServiceRepository.UpdateActivity(identifierDto); ;
+            return chargeActivityServiceRepository.Update(identifierDto); ;
         }
     }
 }

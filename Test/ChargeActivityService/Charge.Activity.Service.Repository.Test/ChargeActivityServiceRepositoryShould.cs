@@ -29,7 +29,7 @@ namespace Charge.Activity.Service.Repository.Test {
         public void when_we_update_activity_we_can_rercover_with_new_data() {                                    
             chargeActivityServiceRepository.Add(identifier.identifier);
 
-            var result = chargeActivityServiceRepository.UpdateActivity(identifier);
+            var result = chargeActivityServiceRepository.Update(identifier);
 
             VerifyResult(result);
             DeleteActivity();

@@ -21,7 +21,7 @@ namespace Charge.Activity.Service.Repository {
             return true;
         }
 
-        public virtual bool UpdateActivity(Charge.Activity.Service.Bussines.Dtos.IdentifierDto identifierDto) {
+        public virtual bool Update(Charge.Activity.Service.Bussines.Dtos.IdentifierDto identifierDto) {
             var activity = ChargesContext.Activities.Where(item => item.Identifier == identifierDto.identifier).FirstOrDefault();
             if(activity != null) {
                 activity.DateSend = DateTime.Now;

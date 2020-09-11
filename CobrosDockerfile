@@ -10,21 +10,7 @@ COPY ["ChargeApi/Charge.Activity.Service.Client/Charge.Activity.Service.Client.c
 COPY ["ChargeApi/Chargues.Repository.Service.Client/Charges.Repository.Service.Client.csproj", "ChargeApi/Chargues.Repository.Service.Client/"]
 COPY ["ChargeApi/Cobros.Action/Charges.Action.csproj", "ChargeApi/Cobros.Action/"]
 
-COPY ["ChargeActivityService/Charge.Activity.Service/Charge.Activity.Service.csproj", "ChargeActivityService/Charge.Activity.Service/"]
-COPY ["ChargeActivityService/Charge.Activity.Service.Actions/Charge.Activity.Service.Action.csproj", "ChargeActivityService/Charge.Activity.Service.Actions/"]
-COPY ["ChargeActivityService/Charge.Activity.Service.Bussines/Charge.Activity.Service.Bussines.csproj", "ChargeActivityService/Charge.Activity.Service.Bussines/"]
-COPY ["ChargeActivityService/Charge.Activity.Service.Repository/Charge.Activity.Service.Repository.Entity.csproj", "ChargeActivityService/Charge.Activity.Service.Repository/"]
-
-COPY ["ChargeRepositoryService/Charge.Repository.Service/Charge.Repository.Service.csproj", "ChargeRepositoryService/Charge.Repository.Service/"]
-COPY ["ChargeRepositoryService/Charge.Repository.Service.Business/Charge.Repository.Service.Business.csproj", "ChargeRepositoryService/Charge.Repository.Service.Business/"]
-COPY ["ChargeRepositoryService/Charge.Repository.Service.Repository/Charge.Repository.Service.Repository.csproj", "ChargeRepositoryService/Charge.Repository.Service.Repository/"]
-COPY ["ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/Charge.Repository.Service.Repository.Entity.csproj", "ChargeRepositoryService/Charge.Repository.Service.Repository.Entity/"]
-
 RUN dotnet restore "ChargeApi/Cobros.API/Charges.API.csproj"
-
-RUN dotnet restore "ChargeActivityService/Charge.Activity.Service/Charge.Activity.Service.csproj"
-
-RUN dotnet restore "ChargeRepositoryService/Charge.Repository.Service/Charge.Repository.Service.csproj"
 
 COPY . .
 WORKDIR "/src"
@@ -32,10 +18,6 @@ WORKDIR "/src"
 
 FROM build AS publish
 RUN dotnet publish "ChargeApi/Cobros.API/Charges.API.csproj" -c Release -o /app
-
-RUN dotnet publish "ChargeActivityService/Charge.Activity.Service/Charge.Activity.Service.csproj" -c Release -o /app
-
-RUN dotnet publish "ChargeRepositoryService/Charge.Repository.Service/Charge.Repository.Service.csproj" -c Release -o /app
 
 # Build runtime image
 FROM base as final

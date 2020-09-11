@@ -22,7 +22,7 @@ namespace Charge.Activity.Service.Client.Test {
             string requestUri = "http://localhost:10002/api/chargeActivity/add";
             var identifier = "anyIdentifier";
             var addResult = true;
-            var identifierDto = new IdentifierDto { identifier = identifier, AddResult = addResult };
+            var identifierDto = new ActivityDto { identifier = identifier, AddResult = addResult };
             var content = GivenAHttpContent(identifierDto, requestUri);
             client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeActivityServiceClient = new ChargeActivityServiceClient(client);
@@ -41,7 +41,7 @@ namespace Charge.Activity.Service.Client.Test {
             string requestUri = "http://localhost:10002/api/chargeActivity/update";
             var identifier = "anyIdentifier";
             var addResult = true;
-            var identifierDto = new IdentifierDto { identifier = identifier, AddResult = addResult };
+            var identifierDto = new ActivityDto { identifier = identifier, AddResult = addResult };
             var content = GivenAHttpContent(identifierDto, requestUri);
             client.PostAsync(requestUri, content).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeActivityServiceClient = new ChargeActivityServiceClient(client);
@@ -52,7 +52,7 @@ namespace Charge.Activity.Service.Client.Test {
             client.Received(1).PostAsync(requestUri, content);
         }
 
-        private static HttpContent GivenAHttpContent(IdentifierDto identifierDto, string requestUri) {
+        private static HttpContent GivenAHttpContent(ActivityDto identifierDto, string requestUri) {
             string json = JsonConvert.SerializeObject(identifierDto, Formatting.Indented);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpRequestMessage request = new HttpRequestMessage {

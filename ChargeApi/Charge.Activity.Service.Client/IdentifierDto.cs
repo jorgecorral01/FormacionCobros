@@ -1,5 +1,5 @@
 ﻿namespace Charge.Activity.Service.Client {
-    public class IdentifierDto {
+    public class ActivityDto {
         public string identifier;
         public bool AddResult;
     }

@@ -15,7 +15,7 @@ namespace Charge.Activity.Service.Client {
             this.httpClient = httpClient;
         }
 
-        public virtual async Task<bool> NotifyNewCharge(IdentifierDto identifier) {
+        public virtual async Task<bool> NotifyNewCharge(ActivityDto identifier) {
             string requestUri = "http://localhost:10002/api/ChargeActivity/add";
             var content = GivenAHttpContent(identifier, requestUri);
             var result = await httpClient.PostAsync(requestUri, content);
@@ -23,7 +23,7 @@ namespace Charge.Activity.Service.Client {
             return false;
         }
         
-        public virtual async Task<bool> UpdateNotifyCharge(IdentifierDto identifierDto) {
+        public virtual async Task<bool> UpdateNotifyCharge(ActivityDto identifierDto) {
             string requestUri = "http://localhost:10002/api/chargeActivity/update";                       
             var content = GivenAHttpContent(identifierDto, requestUri);                        
             var result = await httpClient.PutAsync(requestUri, content);
@@ -31,7 +31,7 @@ namespace Charge.Activity.Service.Client {
             return false;
         }
 
-        private static HttpContent GivenAHttpContent(IdentifierDto identifierDto, string requestUri) {
+        private static HttpContent GivenAHttpContent(ActivityDto identifierDto, string requestUri) {
             string json = JsonConvert.SerializeObject(identifierDto, Formatting.Indented);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpRequestMessage request = new HttpRequestMessage {

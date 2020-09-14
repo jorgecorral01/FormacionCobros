@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: charges
+  name: charges
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: charges
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: charges
+    spec:
+      containers:
+      - image: jorgecorral/formacioncobros:latest
+        imagePullPolicy: "IfNotPresent"
+        name: cobrosapi2
+        ports:
+          - containerPort: 80        
+        resources: {}      
+status: {}

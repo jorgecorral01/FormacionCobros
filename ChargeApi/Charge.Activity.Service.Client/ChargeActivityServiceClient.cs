@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Charge.Activity.Service.Client {
     public partial class ChargeActivityServiceClient {
         private HttpClient httpClient;
+        private string server = "172.17.0.3:30761";
 
         public ChargeActivityServiceClient() { }
 
@@ -16,15 +17,15 @@ namespace Charge.Activity.Service.Client {
         }
 
         public virtual async Task<bool> NotifyNewCharge(ActivityDto identifier) {
-            string requestUri = "http://localhost:10002/api/ChargeActivity/add";
+            string requestUri = string.Format("http://{0}/api/ChargeActivity/add", server);
             var content = GivenAHttpContent(identifier, requestUri);
             var result = await httpClient.PostAsync(requestUri, content);
             if(result.StatusCode == HttpStatusCode.OK) return true;
             return false;
         }
         
-        public virtual async Task<bool> UpdateNotifyCharge(ActivityDto identifierDto) {
-            string requestUri = "http://localhost:10002/api/chargeActivity/update";                       
+        public virtual async Task<bool> UpdateNotifyCharge(ActivityDto identifierDto) {            
+            string requestUri = string.Format("http://{0}/api/ChargeActivity/update", server);
             var content = GivenAHttpContent(identifierDto, requestUri);                        
             var result = await httpClient.PutAsync(requestUri, content);
             if(result.StatusCode == HttpStatusCode.OK) return true;

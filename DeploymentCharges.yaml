@@ -20,7 +20,7 @@ spec:
       containers:
       - image: jorgecorral/formacioncobros:latest
         imagePullPolicy: "IfNotPresent"
-        name: cobrosapi2
+        name: cobrosapi
         ports:
           - containerPort: 80        
         resources: {}      

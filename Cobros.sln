@@ -7,10 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2DE2283A-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChargeApi", "ChargeApi", "{B42A3D61-F77B-4211-8066-0EA81854004D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChargeRepositoryService", "ChargeRepositoryService", "{E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Business", "ChargeRepositoryService\Charge.Repository.Service.Business\Charge.Repository.Service.Business.csproj", "{640D7C76-C075-4609-AC71-965F0B35B1B0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Action", "ChargeApi\Cobros.Action\Charges.Action.csproj", "{C7989B21-ECFE-45B9-8704-47E0CFFFF1A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.API", "ChargeApi\Cobros.API\Charges.API.csproj", "{B8C4C46E-B4B5-4253-A9DE-3CCB6F54418B}"
@@ -18,12 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Business", "ChargeApi\Cobros.Business\Charges.Business.csproj", "{CEEDD988-0AD6-4009-8583-79E5A9110F20}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Repository.Service.Client", "ChargeApi\Chargues.Repository.Service.Client\Charges.Repository.Service.Client.csproj", "{0442EEE7-D844-4068-9AF7-5CE0B3291083}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service", "ChargeRepositoryService\Charge.Repository.Service\Charge.Repository.Service.csproj", "{83E7FD29-6C7B-4405-A23C-CA11A1C2E053}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository.Entity", "ChargeRepositoryService\Charge.Repository.Service.Repository.Entity\Charge.Repository.Service.Repository.Entity.csproj", "{15281051-A810-4AE2-9530-D52F9227675F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository", "ChargeRepositoryService\Charge.Repository.Service.Repository\Charge.Repository.Service.Repository.csproj", "{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Client", "ChargeApi\Charge.Activity.Service.Client\Charge.Activity.Service.Client.csproj", "{37FE17C5-B05B-43F1-B559-9C063988380F}"
 EndProject
@@ -49,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{640D7C76-C075-4609-AC71-965F0B35B1B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{640D7C76-C075-4609-AC71-965F0B35B1B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{640D7C76-C075-4609-AC71-965F0B35B1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{640D7C76-C075-4609-AC71-965F0B35B1B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7989B21-ECFE-45B9-8704-47E0CFFFF1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7989B21-ECFE-45B9-8704-47E0CFFFF1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7989B21-ECFE-45B9-8704-47E0CFFFF1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,18 +55,6 @@ Global
 		{0442EEE7-D844-4068-9AF7-5CE0B3291083}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0442EEE7-D844-4068-9AF7-5CE0B3291083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0442EEE7-D844-4068-9AF7-5CE0B3291083}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83E7FD29-6C7B-4405-A23C-CA11A1C2E053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83E7FD29-6C7B-4405-A23C-CA11A1C2E053}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83E7FD29-6C7B-4405-A23C-CA11A1C2E053}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83E7FD29-6C7B-4405-A23C-CA11A1C2E053}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15281051-A810-4AE2-9530-D52F9227675F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15281051-A810-4AE2-9530-D52F9227675F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15281051-A810-4AE2-9530-D52F9227675F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15281051-A810-4AE2-9530-D52F9227675F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -114,14 +88,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{640D7C76-C075-4609-AC71-965F0B35B1B0} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
 		{C7989B21-ECFE-45B9-8704-47E0CFFFF1A1} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{B8C4C46E-B4B5-4253-A9DE-3CCB6F54418B} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{CEEDD988-0AD6-4009-8583-79E5A9110F20} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{0442EEE7-D844-4068-9AF7-5CE0B3291083} = {B42A3D61-F77B-4211-8066-0EA81854004D}
-		{83E7FD29-6C7B-4405-A23C-CA11A1C2E053} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
-		{15281051-A810-4AE2-9530-D52F9227675F} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
-		{DFA8F9DD-E82F-4547-ADBC-1EF6BB418EC6} = {E4FFB0CB-9D48-4C22-9DCC-12D661CA034B}
 		{37FE17C5-B05B-43F1-B559-9C063988380F} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{EA545DF2-1738-440A-82A4-B7DEFE02B205} = {2DE2283A-6E37-459F-9E51-B3388AAD2ED4}
 		{37E99EEC-F8F2-4821-9A6C-FD0C5364A04D} = {2DE2283A-6E37-459F-9E51-B3388AAD2ED4}

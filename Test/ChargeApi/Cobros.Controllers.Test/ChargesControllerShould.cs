@@ -23,14 +23,23 @@ namespace Charges.Controllers.Test {
             HttpClient client = TestFixture.HttpClient;
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
-            AddChargeAction action = Substitute.For<AddChargeAction>(null, null);
-            ActionsFactoryMock.CreateAddChargeAction(action);
-            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(true);
+            AddChargeAction action = GivenAnAddChargeActionMock();
 
             var result = await client.PostAsync(requestUri, content);
+            
+            await verifyResult(newCharge, action, result);
+        }
 
+        private static async Task verifyResult(Business.Dtos.Charge newCharge, AddChargeAction action, HttpResponseMessage result) {
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
+        }
+
+        private AddChargeAction GivenAnAddChargeActionMock() {
+            AddChargeAction action = Substitute.For<AddChargeAction>(null, null);
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(true);
+            ActionsFactoryMock.CreateAddChargeAction(action);
+            return action;
         }
 
         private static Business.Dtos.Charge GivenANewCharge() {

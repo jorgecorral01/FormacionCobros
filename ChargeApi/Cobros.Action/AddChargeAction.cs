@@ -10,9 +10,6 @@ namespace Charges.Action {
         private ChargeRepositoryServiceClient clientChargeRepository;
         private readonly ChargeActivityServiceClient clientActivityService;
 
-        public AddChargeAction() {
-        }
-
         public AddChargeAction(ChargeRepositoryServiceClient clientChargeRepository, ChargeActivityServiceClient clientActivityService) {
             this.clientChargeRepository = clientChargeRepository;
             this.clientActivityService = clientActivityService;

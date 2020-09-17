@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Chargues.Repository.Service.Client {
     public class ChargeRepositoryServiceClient {
         private HttpClient client;
-        private string server = "172.17.0.3:30209";
+        private string server = "http://localhost:10001"; // "172.17.0.3:30209";
 
         public ChargeRepositoryServiceClient(HttpClient client) {
             this.client = client;
         }
 
         public virtual async Task<bool> AddCharge(Charge newCharge) {            
-            string requestUri = string.Format("http://{0}/api/charges/add", server);
+            string requestUri = string.Format("{0}/api/charges/add", server);
             var content = GivenAHttpContent(newCharge, requestUri);            
             var result = await client.PostAsync(requestUri, content);      
             if (result.StatusCode  == HttpStatusCode.OK) return true;

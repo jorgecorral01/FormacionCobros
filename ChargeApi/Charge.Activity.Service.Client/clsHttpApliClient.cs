@@ -1,4 +1,7 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Charge.Activity.Service.Client {
@@ -9,12 +12,22 @@ namespace Charge.Activity.Service.Client {
             this.httpClient = httpClient;
         }
 
-        public Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent) {
-            throw new System.NotImplementedException();
+        public async  Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent) {
+            try {
+                return await httpClient.PostAsync(requestUri, httpContent);
+            }
+            catch {                
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);                
+            }
         }
 
-        public Task<HttpResponseMessage> PutAsync(string requestUri, HttpContent content) {
-            throw new System.NotImplementedException();
+        public async Task<HttpResponseMessage> PutAsync(string requestUri, HttpContent httpContent) {            
+            try {
+                return await httpClient.PutAsync(requestUri, httpContent);
+            }
+            catch {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

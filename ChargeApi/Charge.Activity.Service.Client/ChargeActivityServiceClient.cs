@@ -9,9 +9,7 @@ namespace Charge.Activity.Service.Client {
     public partial class ChargeActivityServiceClient {
         private HttpClient httpClient;
         private string server = "172.17.0.3:30761";
-
-        public ChargeActivityServiceClient() { }
-
+               
         public ChargeActivityServiceClient(HttpClient httpClient) {
             this.httpClient = httpClient;
         }

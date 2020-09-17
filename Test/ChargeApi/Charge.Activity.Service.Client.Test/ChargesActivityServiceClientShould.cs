@@ -12,16 +12,17 @@ using System.Threading.Tasks;
 namespace Charge.Activity.Service.Client.Test {
     public class ChargesActivityServiceClientShould {
         HttpApiClient client;
+        ActivityDto identifierDto;
+        readonly string server = "http://localhost:10002";
         [SetUp]
         public void Setup() {
             client = GivenAhttpClientMock();
+            identifierDto = GivenAnActivityDto();
         }
 
         [Test]        
         public async Task given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {           
-            string requestUri = "/api/chargeActivity/add";
-            string server = "http://localhost:10002";
-            ActivityDto identifierDto = GivenAnActivityDto();
+            string requestUri = "/api/chargeActivity/add";                       
             var content = GivenAHttpContent(identifierDto, server + requestUri);
             var chargeActivityServiceClient = new ChargeActivityServiceApiClient(client);
 
@@ -33,13 +34,8 @@ namespace Charge.Activity.Service.Client.Test {
         
         [Test]
         public async Task when_we_go_to_update_activity_we_obtein_a_ok_response_with_true_result() {
-            string requestUri = "/api/chargeActivity/update";
-            string server = "http://localhost:10002";            
-            var identifier = "anyIdentifier";
-            var addResult = true;
-            var identifierDto = new ActivityDto { identifier = identifier, AddResult = addResult };
-            var content = GivenAHttpContent(identifierDto, server + requestUri);
-            client.PutAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+            string requestUri = "/api/chargeActivity/update";                 
+            var content = GivenAHttpContent(identifierDto, server + requestUri);            
             var chargeActivityServiceClient = new ChargeActivityServiceApiClient(client);
             
             var result = await chargeActivityServiceClient.UpdateNotifyCharge(identifierDto, server);
@@ -65,8 +61,17 @@ namespace Charge.Activity.Service.Client.Test {
         }
         private static HttpApiClient GivenAhttpClientMock() {
             HttpApiClient client = Substitute.For<HttpApiClient>();
-            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+            valuesReturnForPost(client);
+            valuesReturnForPut(client);
             return client;
+        }
+
+        private static void valuesReturnForPut(HttpApiClient client) {
+            client.PutAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+        }
+
+        private static void valuesReturnForPost(HttpApiClient client) {
+            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
         }
     }
 }

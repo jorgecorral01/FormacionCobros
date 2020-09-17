@@ -37,6 +37,18 @@ namespace Cobros.API.Controllers {
             return BadRequest(new BadRequestError("1", "2"));
         }
 
+        [HttpDelete]
+        [Route("charge/{identifier}")]
+        public async Task<ActionResult> Delete(string identifier) {
+            bool result = await actionFactory
+                .CreateDeleteChargeAction()
+                .Execute(identifier);
+            if(result) {
+                return Ok();
+            }
+            throw new Exception("For TODO");
+        }
+
         private class BadRequestError {
             private string v1;
             private string v2;

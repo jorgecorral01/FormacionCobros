@@ -18,7 +18,7 @@ namespace Charges.Controllers.Test {
     [TestFixture]
     public class ChargesControllerShould {
         Business.Dtos.Charge newCharge;
-        HttpClient client;
+        HttpClient client;        
 
         [SetUp]
         public void Setup() {
@@ -49,6 +49,25 @@ namespace Charges.Controllers.Test {
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
         }
 
+        [Test]
+        public async Task given_an_identifier_try_delete_charge_return_ok_response() {
+            var identifier = "any identifier";
+            var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
+            DeleteChargeAction action = GivenAnDeleteChargeActionMock(true);
+
+            var result = await client.DeleteAsync(requestUri);
+
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            await action.Received(1).Execute(identifier);
+        }
+
+        private DeleteChargeAction GivenAnDeleteChargeActionMock(bool actionResult) {
+            DeleteChargeAction action = Substitute.For<DeleteChargeAction>(new object[] { null });
+            action.Execute(Arg.Any<string>()).Returns(actionResult);
+            ActionsFactoryMock.CreateDeleteChargeAction(action);
+            return action;
+        }
+
         private static async Task verifyResult(Business.Dtos.Charge newCharge, AddChargeAction action, HttpResponseMessage result) {
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
@@ -74,6 +93,6 @@ namespace Charges.Controllers.Test {
                 Content = content
             };
             return content;
-        }
+        }        
     }
 }

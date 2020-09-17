@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Charge.Activity.Service.Client {
     public interface HttpApiClient {
-        Task<HttpResponseMessage> PostAsync(string v, HttpContent httpContent);
+        Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent);
+        Task<HttpResponseMessage> PutAsync(string requestUri, HttpContent content);
     }
 }

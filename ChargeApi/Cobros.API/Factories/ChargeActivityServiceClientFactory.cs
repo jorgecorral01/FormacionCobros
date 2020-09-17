@@ -3,8 +3,8 @@ using System;
 
 namespace Cobros.API.Factories {
     internal class ChargeActivityServiceClientFactory {
-        internal static ChargeActivityServiceClient GetChargeActivityServiceClient() {
-            return new ChargeActivityServiceClient(new System.Net.Http.HttpClient());
+        internal static ChargeActivityServiceApiClient GetChargeActivityServiceClient() {
+            return new ChargeActivityServiceApiClient(new clsHttpApliClient( new System.Net.Http.HttpClient()));
         }
     }
 }

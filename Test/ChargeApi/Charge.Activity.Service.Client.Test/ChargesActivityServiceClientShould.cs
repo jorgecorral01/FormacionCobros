@@ -26,7 +26,7 @@ namespace Charge.Activity.Service.Client.Test {
             var content = GivenAHttpContent(identifierDto, server + requestUri);
             var chargeActivityServiceClient = new ChargeActivityServiceApiClient(client);
 
-            var result = await chargeActivityServiceClient.NotifyNewCharge(identifierDto, server);
+            var result = await chargeActivityServiceClient.NotifyNewCharge(identifierDto);
 
             result.Should().Be(true);
             await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
@@ -38,7 +38,7 @@ namespace Charge.Activity.Service.Client.Test {
             var content = GivenAHttpContent(identifierDto, server + requestUri);            
             var chargeActivityServiceClient = new ChargeActivityServiceApiClient(client);
             
-            var result = await chargeActivityServiceClient.UpdateNotifyCharge(identifierDto, server);
+            var result = await chargeActivityServiceClient.UpdateNotifyCharge(identifierDto);
 
             result.Should().Be(true);
             await client.Received(1).PutAsync(Arg.Any<string>(), Arg.Any<HttpContent>());

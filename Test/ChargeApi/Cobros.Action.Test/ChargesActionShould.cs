@@ -18,7 +18,7 @@ namespace Charges.Action.Test {
             var addResult = true;
             ChargeRepositoryServiceClient clientChargeRepository = GivenAMockRepositoryServiceClient(newCharge, addResult);
             ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
-            ChargeActivityServiceClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
+            ChargeActivityServiceApiClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
 
             var result = await addChargeAction.Execute(newCharge);
@@ -33,8 +33,8 @@ namespace Charges.Action.Test {
             return new ActivityDto { identifier = identifier, AddResult = addResult };
         }
 
-        private static ChargeActivityServiceClient GivenAMockActivityServiceClient(ActivityDto identifierDto) {
-            var clientActivityService = Substitute.For<ChargeActivityServiceClient>();
+        private static ChargeActivityServiceApiClient GivenAMockActivityServiceClient(ActivityDto identifierDto) {
+            var clientActivityService = Substitute.For<ChargeActivityServiceApiClient>(new object[] { null });
             clientActivityService.UpdateNotifyCharge(Arg.Is<ActivityDto>(item => item.identifier == identifierDto.identifier && item.AddResult == identifierDto.AddResult)).Returns(true);
             return clientActivityService;
         }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Charges.Action {
     public class AddChargeAction {
         private ChargeRepositoryServiceClient clientChargeRepository;
-        private readonly ChargeActivityServiceClient clientActivityService;
+        private readonly ChargeActivityServiceApiClient clientActivityService;
 
-        public AddChargeAction(ChargeRepositoryServiceClient clientChargeRepository, ChargeActivityServiceClient clientActivityService) {
+        public AddChargeAction(ChargeRepositoryServiceClient clientChargeRepository, ChargeActivityServiceApiClient chargeActivityServiceApiClient) {
             this.clientChargeRepository = clientChargeRepository;
-            this.clientActivityService = clientActivityService;
+            this.clientActivityService = chargeActivityServiceApiClient;
         }
 
         public virtual async Task<bool> Execute(Business.Dtos.Charge newCharge) {

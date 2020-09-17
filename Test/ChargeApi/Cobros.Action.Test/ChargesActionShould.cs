@@ -16,7 +16,7 @@ namespace Charges.Action.Test {
         public async Task given_data_for_add_new_charge_we_obtein_a_true_response() {
             Business.Dtos.Charge newCharge = GivenACharge();
             var addResult = true;
-            ChargeRepositoryServiceClient clientChargeRepository = GivenAMockRepositoryServiceClient(newCharge, addResult);
+            ChargeRepositoryServiceApiClient clientChargeRepository = GivenAMockRepositoryServiceClient(newCharge, addResult);
             ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
             ChargeActivityServiceApiClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
@@ -39,8 +39,8 @@ namespace Charges.Action.Test {
             return clientActivityService;
         }
 
-        private static ChargeRepositoryServiceClient GivenAMockRepositoryServiceClient(Business.Dtos.Charge newCharge, bool addResult) {
-            var clientChargeRepository = Substitute.For<ChargeRepositoryServiceClient>(new object[] { null });
+        private static ChargeRepositoryServiceApiClient GivenAMockRepositoryServiceClient(Business.Dtos.Charge newCharge, bool addResult) {
+            var clientChargeRepository = Substitute.For<ChargeRepositoryServiceApiClient>(new object[] { null });
             clientChargeRepository.AddCharge(newCharge).Returns(addResult);
             return clientChargeRepository;
         }

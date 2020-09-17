@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace Charge.Activity.Service.Client {
-    public interface HttpApiClient {
+
+namespace HttpApiClient {
+    public interface IHttpApiClient {
         Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent);
         Task<HttpResponseMessage> PutAsync(string requestUri, HttpContent content);
     }

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HttpApiClient\HttpApiClient.csproj" />
     <ProjectReference Include="..\Cobros.Action\Charges.Action.csproj" />
     <ProjectReference Include="..\Cobros.Business\Charges.Business.csproj" />
   </ItemGroup>

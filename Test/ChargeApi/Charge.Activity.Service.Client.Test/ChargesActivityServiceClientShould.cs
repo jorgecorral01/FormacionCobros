@@ -1,4 +1,5 @@
 using FluentAssertions;
+using HttpApiClient;
 using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Charge.Activity.Service.Client.Test {
     public class ChargesActivityServiceClientShould {
-        HttpApiClient client;
+        IHttpApiClient client;
         ActivityDto identifierDto;
         readonly string server = "http://localhost:10002";
         [SetUp]
@@ -59,18 +60,18 @@ namespace Charge.Activity.Service.Client.Test {
             var identifierDto = new ActivityDto { identifier = identifier, AddResult = addResult };
             return identifierDto;
         }
-        private static HttpApiClient GivenAhttpClientMock() {
-            HttpApiClient client = Substitute.For<HttpApiClient>();
+        private static IHttpApiClient GivenAhttpClientMock() {
+            IHttpApiClient client = Substitute.For<IHttpApiClient>();
             valuesReturnForPost(client);
             valuesReturnForPut(client);
             return client;
         }
 
-        private static void valuesReturnForPut(HttpApiClient client) {
+        private static void valuesReturnForPut(IHttpApiClient client) {
             client.PutAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
         }
 
-        private static void valuesReturnForPost(HttpApiClient client) {
+        private static void valuesReturnForPost(IHttpApiClient client) {
             client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
         }
     }

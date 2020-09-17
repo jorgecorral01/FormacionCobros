@@ -1,4 +1,5 @@
 ﻿using Charge.Activity.Service.Client;
+using HttpApiClient;
 using System;
 
 namespace Cobros.API.Factories {

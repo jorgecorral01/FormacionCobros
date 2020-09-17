@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Controllers.Test", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Client.Test", "Test\ChargeApi\Charge.Activity.Service.Client.Test\Charge.Activity.Service.Client.Test.csproj", "{01672BC9-67D6-4B6D-A448-9762E8B31765}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpApiClient", "HttpApiClient\HttpApiClient.csproj", "{CF4F9B68-F132-4C99-B055-AF64B7AD4533}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{01672BC9-67D6-4B6D-A448-9762E8B31765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01672BC9-67D6-4B6D-A448-9762E8B31765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01672BC9-67D6-4B6D-A448-9762E8B31765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF4F9B68-F132-4C99-B055-AF64B7AD4533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4F9B68-F132-4C99-B055-AF64B7AD4533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4F9B68-F132-4C99-B055-AF64B7AD4533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4F9B68-F132-4C99-B055-AF64B7AD4533}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{9ADCE923-CF8C-4961-B6A8-13EE48715F50} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}
 		{D43A95C7-672C-484A-82A2-0340CAED5EBC} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}
 		{01672BC9-67D6-4B6D-A448-9762E8B31765} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}
+		{CF4F9B68-F132-4C99-B055-AF64B7AD4533} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F80D850-3F20-4972-88C7-4D6956DC2E09}

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Charges.Action {
     public class AddChargeAction {
-        private ChargeRepositoryServiceClient clientChargeRepository;
+        private ChargeRepositoryServiceApiClient clientChargeRepository;
         private readonly ChargeActivityServiceApiClient clientActivityService;
 
-        public AddChargeAction(ChargeRepositoryServiceClient clientChargeRepository, ChargeActivityServiceApiClient chargeActivityServiceApiClient) {
+        public AddChargeAction(ChargeRepositoryServiceApiClient clientChargeRepository, ChargeActivityServiceApiClient chargeActivityServiceApiClient) {
             this.clientChargeRepository = clientChargeRepository;
             this.clientActivityService = chargeActivityServiceApiClient;
         }

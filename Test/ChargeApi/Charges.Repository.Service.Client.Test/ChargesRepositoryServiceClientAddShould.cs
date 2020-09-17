@@ -1,6 +1,7 @@
 using Charges.Business.Dtos;
 using Chargues.Repository.Service.Client;
 using FluentAssertions;
+using HttpApiClient;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NSubstitute;
@@ -17,22 +18,20 @@ namespace Charges.Repository.Service.Client.Test {
         public void Setup() {
         }
                
-        [Ignore ("TODO client.PostAsync i can do return reponse Ok")]
+        
         [Test]
-        //async Task
-        public void given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
-            HttpClient client = Substitute.For<HttpClient>();
+        public async Task given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
+            IHttpApiClient client = Substitute.For<IHttpApiClient>();
             string requestUri = "http://localhost:10001/api/charges/add";
             var newCharge = new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
             var content = GivenAHttpContent(newCharge, requestUri);
             client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
-            var chargeRepositoryServiceClient = new ChargeRepositoryServiceClient(client);
+            var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
-            var result =  chargeRepositoryServiceClient.AddCharge(newCharge);
+            var result = await chargeRepositoryServiceClient.AddCharge(newCharge);
 
-            result.Should().Be(true);
-
-            client.Received(1).PostAsync(requestUri, content);
+            result.Should().Be(true);            
+            await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

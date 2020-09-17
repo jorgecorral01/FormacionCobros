@@ -6,7 +6,7 @@ using System;
 
 namespace Cobros.API.Factories {
     public class ActionFactory {
-        private ChargeRepositoryServiceClient chargeRepositoryServiceClient;
+        private ChargeRepositoryServiceApiClient chargeRepositoryServiceClient;
         private ChargeActivityServiceApiClient chargeActivityServiceClient;
         public ActionFactory() {
             chargeRepositoryServiceClient = ChargeRepositoryServiceClientFactory.GetChargeRepositoryServiceClient();

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HttpApiClient;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Charge.Activity.Service.Client {
     public partial class ChargeActivityServiceApiClient {
-        private HttpApiClient httpApiClient;
+        private IHttpApiClient httpApiClient;
         private string server = "http://localhost:10002"; //  "172.17.0.3:30761";
 
 
-        public ChargeActivityServiceApiClient(HttpApiClient httpApiClient) {
+        public ChargeActivityServiceApiClient(IHttpApiClient httpApiClient) {
             this.httpApiClient = httpApiClient;
         }
 

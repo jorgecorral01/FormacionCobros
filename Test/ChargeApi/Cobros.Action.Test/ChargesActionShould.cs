@@ -29,6 +29,18 @@ namespace Charges.Action.Test {
             await clientActivityService.Received(1).UpdateNotifyCharge(Arg.Is<ActivityDto>(item => item.identifier == activityDto.identifier && item.AddResult == activityDto.AddResult));
         }
 
+        [Test]
+        public async Task given_an_idenfier_for_delete_charge_we_obtein_a_true_response() {
+            var identifier = "any identifier";
+            ChargeRepositoryServiceApiClient clientChargeRepository = Substitute.For<ChargeRepositoryServiceApiClient>(new object[] { null });
+            clientChargeRepository.DeleteCharge(identifier).Returns(true);
+            var deleteChargeAction = new DeleteChargeAction(clientChargeRepository);
+
+            var result = await deleteChargeAction.Execute(identifier);
+
+            result.Should().Be(true);
+            await clientChargeRepository.Received(1).DeleteCharge(identifier);
+        }
         private static ActivityDto GivenAnActivity(string identifier, bool addResult) {
             return new ActivityDto { identifier = identifier, AddResult = addResult };
         }

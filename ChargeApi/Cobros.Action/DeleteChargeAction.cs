@@ -12,9 +12,8 @@ namespace Charges.Action {
         public DeleteChargeAction(ChargeRepositoryServiceApiClient clientChargeRepository) {
             this.clientChargeRepository = clientChargeRepository;            
         }
-        public virtual  async Task<bool> Execute(string identifier) {
-            await Task.Delay(1);
-            return true;
+        public virtual  async Task<bool> Execute(string identifier) {            
+            return await clientChargeRepository.DeleteCharge(identifier);
         }
     }
 }

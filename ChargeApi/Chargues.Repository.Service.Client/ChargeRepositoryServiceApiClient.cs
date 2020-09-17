@@ -35,5 +35,10 @@ namespace Chargues.Repository.Service.Client {
             };
             return content;
         }
+
+        public virtual async Task<bool> DeleteCharge(string identifier) {
+            await Task.Delay(1);
+            return true;
+        }
     }
 }

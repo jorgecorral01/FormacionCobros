@@ -21,17 +21,26 @@ namespace Charges.Repository.Service.Client.Test {
         
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
-            IHttpApiClient client = Substitute.For<IHttpApiClient>();
+            IHttpApiClient client = GivenAHttpClienMock();
             string requestUri = "http://localhost:10001/api/charges/add";
-            var newCharge = new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
+            Charge newCharge = GivenACharge();
             var content = GivenAHttpContent(newCharge, requestUri);
-            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
             var result = await chargeRepositoryServiceClient.AddCharge(newCharge);
 
-            result.Should().Be(true);            
+            result.Should().Be(true);
             await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
+        }
+
+        private static Charge GivenACharge() {
+            return new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
+        }
+
+        private static IHttpApiClient GivenAHttpClienMock() {
+            var client = Substitute.For<IHttpApiClient>();
+            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+            return client;
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

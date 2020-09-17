@@ -17,10 +17,17 @@ using System.Threading.Tasks;
 namespace Charges.Controllers.Test {
     [TestFixture]
     public class ChargesControllerShould {
+        Business.Dtos.Charge newCharge;
+        HttpClient client;
+
+        [SetUp]
+        public void Setup() {
+            newCharge = GivenANewCharge();
+            client = TestFixture.HttpClient;
+        }
+
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_an_ok_response() {
-            Business.Dtos.Charge newCharge = GivenANewCharge();
-            HttpClient client = TestFixture.HttpClient;
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
             AddChargeAction action = GivenAnAddChargeActionMock(true);
@@ -31,9 +38,7 @@ namespace Charges.Controllers.Test {
         }
 
         [Test]
-        public async Task given_data_for_add_new_charge_and_have_any_problem_we_obtein_bad_request() {
-            Business.Dtos.Charge newCharge = GivenANewCharge();
-            HttpClient client = TestFixture.HttpClient;
+        public async Task given_data_for_add_new_charge_and_have_any_problem_we_obtein_bad_request() {         
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
             AddChargeAction action = GivenAnAddChargeActionMock(false);

@@ -23,11 +23,25 @@ namespace Charges.Controllers.Test {
             HttpClient client = TestFixture.HttpClient;
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
-            AddChargeAction action = GivenAnAddChargeActionMock();
+            AddChargeAction action = GivenAnAddChargeActionMock(true);
 
             var result = await client.PostAsync(requestUri, content);
             
             await verifyResult(newCharge, action, result);
+        }
+
+        [Test]
+        public async Task given_data_for_add_new_charge_and_have_any_problem_we_obtein_bad_request() {
+            Business.Dtos.Charge newCharge = GivenANewCharge();
+            HttpClient client = TestFixture.HttpClient;
+            var requestUri = "http://localhost:10000/api/charges";
+            var content = GivenAHttpContent(newCharge, requestUri);
+            AddChargeAction action = GivenAnAddChargeActionMock(false);
+
+            var result = await client.PostAsync(requestUri, content);
+
+            result.StatusCode.Should().Be(HttpStatusCode.BadRequest);            //TODO add text to badrequest 
+            await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
         }
 
         private static async Task verifyResult(Business.Dtos.Charge newCharge, AddChargeAction action, HttpResponseMessage result) {
@@ -35,9 +49,9 @@ namespace Charges.Controllers.Test {
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
         }
 
-        private AddChargeAction GivenAnAddChargeActionMock() {
+        private AddChargeAction GivenAnAddChargeActionMock(bool actionResult) {
             AddChargeAction action = Substitute.For<AddChargeAction>(null, null);
-            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(true);
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(actionResult);
             ActionsFactoryMock.CreateAddChargeAction(action);
             return action;
         }

@@ -19,12 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Cli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChargeApi", "ChargeApi", "{EA545DF2-1738-440A-82A4-B7DEFE02B205}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChargeRepositoryService", "ChargeRepositoryService", "{37E99EEC-F8F2-4821-9A6C-FD0C5364A04D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Controller.Test", "Test\ChargeRepositoryService\Charge.Repository.Service.Test\Charge.Repository.Service.Controller.Test.csproj", "{16A557BE-D7C0-4602-B589-2A7A2D33F489}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Repository.Service.Repository.Test", "Test\ChargeRepositoryService\Charge.Repository.Service.Repository.Test\Charge.Repository.Service.Repository.Test.csproj", "{B2245821-098B-4F3C-A894-1F5B10981A10}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Repository.Service.Client.Test", "Test\ChargeApi\Charges.Repository.Service.Client.Test\Charges.Repository.Service.Client.Test.csproj", "{13DD83FD-FDD6-431F-8CEB-280E4E6FDBD2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Action.Test", "Test\ChargeApi\Cobros.Action.Test\Charges.Action.Test.csproj", "{9ADCE923-CF8C-4961-B6A8-13EE48715F50}"
@@ -33,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charges.Controllers.Test", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charge.Activity.Service.Client.Test", "Test\ChargeApi\Charge.Activity.Service.Client.Test\Charge.Activity.Service.Client.Test.csproj", "{01672BC9-67D6-4B6D-A448-9762E8B31765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpApiClient", "HttpApiClient\HttpApiClient.csproj", "{CF4F9B68-F132-4C99-B055-AF64B7AD4533}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpApiClient", "HttpApiClient\HttpApiClient.csproj", "{CF4F9B68-F132-4C99-B055-AF64B7AD4533}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,14 +55,6 @@ Global
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37FE17C5-B05B-43F1-B559-9C063988380F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16A557BE-D7C0-4602-B589-2A7A2D33F489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16A557BE-D7C0-4602-B589-2A7A2D33F489}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16A557BE-D7C0-4602-B589-2A7A2D33F489}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16A557BE-D7C0-4602-B589-2A7A2D33F489}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2245821-098B-4F3C-A894-1F5B10981A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2245821-098B-4F3C-A894-1F5B10981A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2245821-098B-4F3C-A894-1F5B10981A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2245821-098B-4F3C-A894-1F5B10981A10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13DD83FD-FDD6-431F-8CEB-280E4E6FDBD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13DD83FD-FDD6-431F-8CEB-280E4E6FDBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13DD83FD-FDD6-431F-8CEB-280E4E6FDBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,9 +86,6 @@ Global
 		{0442EEE7-D844-4068-9AF7-5CE0B3291083} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{37FE17C5-B05B-43F1-B559-9C063988380F} = {B42A3D61-F77B-4211-8066-0EA81854004D}
 		{EA545DF2-1738-440A-82A4-B7DEFE02B205} = {2DE2283A-6E37-459F-9E51-B3388AAD2ED4}
-		{37E99EEC-F8F2-4821-9A6C-FD0C5364A04D} = {2DE2283A-6E37-459F-9E51-B3388AAD2ED4}
-		{16A557BE-D7C0-4602-B589-2A7A2D33F489} = {37E99EEC-F8F2-4821-9A6C-FD0C5364A04D}
-		{B2245821-098B-4F3C-A894-1F5B10981A10} = {37E99EEC-F8F2-4821-9A6C-FD0C5364A04D}
 		{13DD83FD-FDD6-431F-8CEB-280E4E6FDBD2} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}
 		{9ADCE923-CF8C-4961-B6A8-13EE48715F50} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}
 		{D43A95C7-672C-484A-82A2-0340CAED5EBC} = {EA545DF2-1738-440A-82A4-B7DEFE02B205}

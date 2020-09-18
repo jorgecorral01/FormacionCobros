@@ -1,4 +1,5 @@
 ﻿using Charges.Action;
+using Charges.Business.Dtos;
 using Charges.Business.Exceptions;
 using Charges.Controllers.Test.mocks;
 using Cobros.API.Controllers;
@@ -33,7 +34,8 @@ namespace Charges.Controllers.Test {
         public async Task given_data_for_add_new_charge_we_obtein_an_ok_response() {
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
-            AddChargeAction action = GivenAnAddChargeActionMock(true);
+            AddChargeAction action = GivenAnAddChargeActionMock();
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(new ChargeResponseOK());
 
             var result = await client.PostAsync(requestUri, content);
             
@@ -41,10 +43,27 @@ namespace Charges.Controllers.Test {
         }
 
         [Test]
+        public async Task given_data_for_add_new_charge_and_exist_identifier_we_obtein_a_bad_response() {
+            var requestUri = "http://localhost:10000/api/charges";
+            var content = GivenAHttpContent(newCharge, requestUri);
+            AddChargeAction action = GivenAnAddChargeActionMock();
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(new ChargeAlreadyExist());
+
+            var result = await client.PostAsync(requestUri, content);
+
+            ChargeResponseKO response = JsonConvert.DeserializeObject<ChargeResponseKO>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+            response.Should().BeOfType<Charges.Business.Dtos.ChargeResponseKO>();            
+            result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Message.Should().Be("Identifier already exist");            
+            await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
+        }
+
+        [Test]
         public async Task given_data_for_add_new_charge_and_have_any_problem_we_obtein_bad_request() {         
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
-            AddChargeAction action = GivenAnAddChargeActionMock(false);
+            AddChargeAction action = GivenAnAddChargeActionMock();
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(new ChargeResponseKO());
 
             var result = await client.PostAsync(requestUri, content);
 
@@ -108,9 +127,8 @@ namespace Charges.Controllers.Test {
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
         }
 
-        private AddChargeAction GivenAnAddChargeActionMock(bool actionResult) {
-            AddChargeAction action = Substitute.For<AddChargeAction>(null, null);
-            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(actionResult);
+        private AddChargeAction GivenAnAddChargeActionMock() {
+            AddChargeAction action = Substitute.For<AddChargeAction>(null, null);            
             ActionsFactoryMock.CreateAddChargeAction(action);
             return action;
         }

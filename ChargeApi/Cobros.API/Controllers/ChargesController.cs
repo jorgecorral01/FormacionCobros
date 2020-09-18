@@ -6,6 +6,7 @@ using Charges.API.swagger;
 using Charges.Business.Dtos;
 using Charges.Business.Exceptions;
 using Cobros.API.Factories;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
@@ -25,17 +26,16 @@ namespace Cobros.API.Controllers {
             this.actionFactory = actionFactory;
         }
 
-        // POST api/charges
         [HttpPost]
-        public async Task<ActionResult> Post(Charges.Business.Dtos.Charge charge) {
-            bool result = await actionFactory
+        public async Task<ActionResult<ChargeResponse>> Post(Charges.Business.Dtos.Charge charge) {
+            ChargeResponse result = await actionFactory
                 .CreateAddChargeAction()
                 .Execute(charge);
-            if(result) {
-                return Ok();
+            if (result is ChargeAlreadyExist) {
+                return BadRequest(new ChargeResponseKO() { Message = "Identifier already exist" }); ;
+
             }
-            //return BadRequest("dddddd");
-            return BadRequest(new BadRequestError("1", "2"));
+             return Ok(result);            
         }
 
         [HttpDelete]
@@ -54,18 +54,6 @@ namespace Cobros.API.Controllers {
             }
             catch(ChargesException ex) {
                 return BadRequest(ex.Message);
-            }
-
-
-        }
-
-        private class BadRequestError {
-            private string v1;
-            private string v2;
-
-            public BadRequestError(string v1, string v2) {
-                this.v1 = v1;
-                this.v2 = v2;
             }
         }
     }

@@ -69,8 +69,8 @@ namespace Charges.Action.Test {
         private Business.Dtos.Charge GivenACharge() {
             return new Charges.Business.Dtos.Charge { Description = "Nuevo cobro", Amount = 1000, identifier = identifier };
         }
-        private async Task VerifyResult(Business.Dtos.Charge newCharge, ActivityDto activityDto, ChargeActivityServiceApiClient clientActivityService, bool result) {
-            result.Should().Be(true);
+        private async Task VerifyResult(Business.Dtos.Charge newCharge, ActivityDto activityDto, ChargeActivityServiceApiClient clientActivityService, ChargeResponse result) {
+            result.Should().BeOfType<ChargeResponseOK>();
             await clientActivityService.Received(1).NotifyNewCharge(Arg.Is<ActivityDto>(item => item.identifier == activityDto.identifier));
             await clientChargeRepository.Received(1).AddCharge(newCharge);
             await clientActivityService.Received(1).UpdateNotifyCharge(Arg.Is<ActivityDto>(item => item.identifier == activityDto.identifier && item.AddResult == activityDto.AddResult));

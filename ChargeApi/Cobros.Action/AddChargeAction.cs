@@ -15,11 +15,18 @@ namespace Charges.Action {
             this.clientActivityService = chargeActivityServiceApiClient;
         }
 
-        public virtual async Task<bool> Execute(Business.Dtos.Charge newCharge) {
+        public virtual async Task<ChargeResponse> Execute(Business.Dtos.Charge newCharge) {
             await clientActivityService.NotifyNewCharge ( new ActivityDto { identifier = newCharge.identifier });
             var resultAdd =   await clientChargeRepository.AddCharge(newCharge);
             var identifierDto = new ActivityDto { identifier = newCharge.identifier, AddResult = resultAdd };
-            return await clientActivityService.UpdateNotifyCharge(identifierDto);
+            var result = await clientActivityService.UpdateNotifyCharge(identifierDto);
+            if(result) {
+                return new ChargeResponseOK(); 
+            }
+            else {
+                return new ChargeResponseKO();
+            }
+            
         }
     }
 }

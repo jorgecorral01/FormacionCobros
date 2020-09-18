@@ -13,15 +13,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Charges.Repository.Service.Client.Test {
-    public class ChargesRepositoryServiceClientAddShould{        
+    public class ChargesRepositoryServiceClientAddShould {
+        string identifier;
+        IHttpApiClient client;
+
         [SetUp]
-        public void Setup() {
+        public void Setup() {            
+            identifier = "any identifier";
         }
-               
-        
+
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
-            IHttpApiClient client = GivenAHttpClienMock();
+            ReturnOkFor();
             string requestUri = "http://localhost:10001/api/charges/add";
             Charge newCharge = GivenACharge();
             var content = GivenAHttpContent(newCharge, requestUri);
@@ -32,13 +35,11 @@ namespace Charges.Repository.Service.Client.Test {
             result.Should().Be(true);
             await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
         }
-        
+
         [Test]
         public async Task given_an_identifier_try_delete_charge_return_ok_response() {
-            var identifier = "any identifier";
-            IHttpApiClient client = GivenAHttpClienMock();
-            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
-            string requestUri = string.Format("http://localhost:10001/api/charges/charge/{0}",identifier);
+            ReturnOkForDelete();
+            string requestUri = string.Format("http://localhost:10001/api/charges/charge/{0}", identifier);
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
             var result = await chargeRepositoryServiceClient.DeleteCharge(identifier);
@@ -48,10 +49,8 @@ namespace Charges.Repository.Service.Client.Test {
         }
 
         [Test]
-        public async Task given_an_identifier_try_delete_charge_return_not_found_if_charge_dont_exist() {
-            var identifier = "any identifier";
-            IHttpApiClient client = GivenAHttpClienMock();
-            client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.NotFound));            
+        public async Task given_an_identifier_try_delete_charge_return_not_found_if_charge_dont_exist() {            
+            ReturnNotFoundFor();
             string requestUri = string.Format("http://localhost:10001/api/charges/charge/{0}", identifier);
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
@@ -61,6 +60,18 @@ namespace Charges.Repository.Service.Client.Test {
             await client.Received(1).DeleteAsync(Arg.Any<string>());
         }
 
+        private void ReturnNotFoundFor() {
+            client = GivenAHttpClienMock();
+            client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.NotFound));
+        }
+        private void ReturnOkFor() {
+            client = GivenAHttpClienMock();
+            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+        }
+        private void ReturnOkForDelete() {
+            client = GivenAHttpClienMock();
+            client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+        }
         private static Charge GivenACharge() {
             return new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
         }

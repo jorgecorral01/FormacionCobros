@@ -18,12 +18,14 @@ namespace Charges.Controllers.Test {
     [TestFixture]
     public class ChargesControllerShould {
         Business.Dtos.Charge newCharge;
-        HttpClient client;        
+        HttpClient client;
+        string identifier = "any identifier";
 
         [SetUp]
         public void Setup() {
             newCharge = GivenANewCharge();
             client = TestFixture.HttpClient;
+            identifier = "any identifier";
         }
 
         [Test]
@@ -50,8 +52,7 @@ namespace Charges.Controllers.Test {
         }
 
         [Test]
-        public async Task given_an_identifier_try_delete_charge_return_ok_response() {
-            var identifier = "any identifier";
+        public async Task given_an_identifier_try_delete_charge_return_ok_response() {            
             var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
             DeleteChargeAction action = GivenAnDeleteChargeActionMock(true);
 
@@ -62,8 +63,7 @@ namespace Charges.Controllers.Test {
         }
 
         [Test]
-        public async Task given_an_identifier_try_delete_not_exist_charge_return_not_found_response() {
-            var identifier = "any identifier";
+        public async Task given_an_identifier_try_delete_not_exist_charge_return_not_found_response() {           
             var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
             DeleteChargeAction action = GivenAnDeleteChargeActionMock(false);
 

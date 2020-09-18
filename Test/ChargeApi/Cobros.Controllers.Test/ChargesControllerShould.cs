@@ -78,12 +78,22 @@ namespace Charges.Controllers.Test {
         public async Task given_an_identifier_try_delete_and_have_anyproblem_return_badrequest_response() {
             var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
             DeleteChargeAction action = GivenAnDeleteChargeActionMock();
-            action.Execute(Arg.Any<string>()).Throws(new ChargesException("any problem"));
+            string messageException = "any message exception";
+            ReturnsExceptionFor(action, messageException);
+
             var result = await client.DeleteAsync(requestUri);
 
+            await VerifyResult(action, result, messageException);
+        }
+
+        private static void ReturnsExceptionFor(DeleteChargeAction action, string messageException) {
+            action.Execute(Arg.Any<string>()).Throws(new ChargesException(messageException));
+        }
+
+        private async Task VerifyResult(DeleteChargeAction action, HttpResponseMessage result, string messageException) {
             result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var errorMessage = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            errorMessage.Should().Be("any problem");
+            errorMessage.Should().Be(messageException);
             await action.Received(1).Execute(identifier);
         }
 

@@ -32,7 +32,7 @@ namespace Charges.Action.Test {
         [Test]
         public async Task given_an_idenfier_for_delete_charge_we_obtein_a_true_response() {
             var identifier = "any identifier";
-            ChargeRepositoryServiceApiClient clientChargeRepository = Substitute.For<ChargeRepositoryServiceApiClient>(new object[] { null });
+            ChargeRepositoryServiceApiClient clientChargeRepository = GivenARepositoryMock();
             clientChargeRepository.DeleteCharge(identifier).Returns(true);
             var deleteChargeAction = new DeleteChargeAction(clientChargeRepository);
 
@@ -41,6 +41,11 @@ namespace Charges.Action.Test {
             result.Should().Be(true);
             await clientChargeRepository.Received(1).DeleteCharge(identifier);
         }
+
+        private static ChargeRepositoryServiceApiClient GivenARepositoryMock() {
+            return Substitute.For<ChargeRepositoryServiceApiClient>(new object[] { null });
+        }
+
         private static ActivityDto GivenAnActivity(string identifier, bool addResult) {
             return new ActivityDto { identifier = identifier, AddResult = addResult };
         }

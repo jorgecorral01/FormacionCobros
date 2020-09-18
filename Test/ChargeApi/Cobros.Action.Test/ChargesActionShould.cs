@@ -42,6 +42,19 @@ namespace Charges.Action.Test {
             await clientChargeRepository.Received(1).DeleteCharge(identifier);
         }
 
+        [Test]
+        public async Task given_an_idenfier_for_delete_charge_and_dont_exist_we_obtein_a_false_response() {
+            var identifier = "any identifier";
+            ChargeRepositoryServiceApiClient clientChargeRepository = GivenARepositoryMock();
+            clientChargeRepository.DeleteCharge(identifier).Returns(false);
+            var deleteChargeAction = new DeleteChargeAction(clientChargeRepository);
+
+            var result = await deleteChargeAction.Execute(identifier);
+
+            result.Should().Be(false);
+            await clientChargeRepository.Received(1).DeleteCharge(identifier);
+        }
+
         private static ChargeRepositoryServiceApiClient GivenARepositoryMock() {
             return Substitute.For<ChargeRepositoryServiceApiClient>(new object[] { null });
         }

@@ -25,6 +25,13 @@ namespace Chargues.Repository.Service.Client {
             throw new Exception("TODO");
         }
 
+        public virtual async Task<bool> DeleteCharge(string identifier) {
+            string requestUri = string.Format("{0}/api/charges/addcharge/{1}", server, identifier);
+            var result = await client.DeleteAsync(requestUri);
+            if(result.StatusCode == HttpStatusCode.OK) return true;
+            throw new Exception("TODO");
+        }
+
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {
             string jsonVideo = JsonConvert.SerializeObject(charge2, Formatting.Indented);
             HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
@@ -34,11 +41,6 @@ namespace Chargues.Repository.Service.Client {
                 Content = content
             };
             return content;
-        }
-
-        public virtual async Task<bool> DeleteCharge(string identifier) {
-            await Task.Delay(1);
-            return true;
-        }
+        }        
     }
 }

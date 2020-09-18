@@ -32,14 +32,27 @@ namespace Charges.Repository.Service.Client.Test {
             result.Should().Be(true);
             await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
         }
+        [Test]
+        public async Task given_an_identifier_try_delete_charge_return_ok_response() {
+            var identifier = "any identifier";
+            IHttpApiClient client = GivenAHttpClienMock();
+            string requestUri = string.Format("http://localhost:10001/api/charges/charge/{0}",identifier);
+            var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
-        private static Charge GivenACharge() {
+            var result = await chargeRepositoryServiceClient.DeleteCharge(identifier);
+
+            result.Should().Be(true);
+            await client.Received(1).DeleteAsync(Arg.Any<string>());
+        }
+
+            private static Charge GivenACharge() {
             return new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
         }
 
         private static IHttpApiClient GivenAHttpClienMock() {
             var client = Substitute.For<IHttpApiClient>();
             client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
+            client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
             return client;
         }
 

@@ -63,11 +63,13 @@ namespace Charges.Controllers.Test {
             var requestUri = "http://localhost:10000/api/charges";
             var content = GivenAHttpContent(newCharge, requestUri);
             AddChargeAction action = GivenAnAddChargeActionMock();
-            action.Execute(Arg.Any<Business.Dtos.Charge>()).Returns(new ChargeResponseKO());
+            action.Execute(Arg.Any<Business.Dtos.Charge>()).Throws(new ChargesException("any message exception"));
 
             var result = await client.PostAsync(requestUri, content);
 
-            result.StatusCode.Should().Be(HttpStatusCode.BadRequest);            //TODO add text to badrequest 
+            result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            ChargeResponseKO response = JsonConvert.DeserializeObject<ChargeResponseKO>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+            response.Message.Should().Be("any message exception");
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
         }
 

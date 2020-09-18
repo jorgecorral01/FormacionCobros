@@ -28,14 +28,19 @@ namespace Cobros.API.Controllers {
 
         [HttpPost]
         public async Task<ActionResult<ChargeResponse>> Post(Charges.Business.Dtos.Charge charge) {
-            ChargeResponse result = await actionFactory
-                .CreateAddChargeAction()
-                .Execute(charge);
-            if (result is ChargeAlreadyExist) {
-                return BadRequest(new ChargeResponseKO() { Message = "Identifier already exist" }); ;
+            try {
+                ChargeResponse result = await actionFactory
+                    .CreateAddChargeAction()
+                    .Execute(charge);
+                if(result is ChargeAlreadyExist) {
+                    return BadRequest(new ChargeResponseKO() { Message = "Identifier already exist" }); ;
 
+                }
+                return Ok(result);
             }
-             return Ok(result);            
+            catch(Exception e) {
+                return BadRequest(new ChargeResponseKO() { Message = e.Message });
+            }
         }
 
         [HttpDelete]

@@ -46,7 +46,10 @@ namespace Cobros.API.Controllers {
             if(result) {
                 return Ok();
             }
-            throw new Exception("For TODO");
+            else {
+                return NotFound();
+            }
+            
         }
 
         private class BadRequestError {

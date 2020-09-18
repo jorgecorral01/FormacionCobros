@@ -61,6 +61,18 @@ namespace Charges.Controllers.Test {
             await action.Received(1).Execute(identifier);
         }
 
+        [Test]
+        public async Task given_an_identifier_try_delete_not_exist_charge_return_not_found_response() {
+            var identifier = "any identifier";
+            var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
+            DeleteChargeAction action = GivenAnDeleteChargeActionMock(false);
+
+            var result = await client.DeleteAsync(requestUri);
+
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            await action.Received(1).Execute(identifier);
+        }
+
         private DeleteChargeAction GivenAnDeleteChargeActionMock(bool actionResult) {
             DeleteChargeAction action = Substitute.For<DeleteChargeAction>(new object[] { null });
             action.Execute(Arg.Any<string>()).Returns(actionResult);

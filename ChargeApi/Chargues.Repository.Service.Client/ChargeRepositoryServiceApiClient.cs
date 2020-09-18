@@ -29,6 +29,7 @@ namespace Chargues.Repository.Service.Client {
             string requestUri = string.Format("{0}/api/charges/addcharge/{1}", server, identifier);
             var result = await client.DeleteAsync(requestUri);
             if(result.StatusCode == HttpStatusCode.OK) return true;
+            if(result.StatusCode == HttpStatusCode.NotFound) return false;
             throw new Exception("TODO");
         }
 

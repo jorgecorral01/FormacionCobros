@@ -42,6 +42,10 @@ namespace Chargues.Repository.Service.Client {
                 Content = content
             };
             return content;
-        }        
+        }
+
+        public virtual ChargeResponse Get(string identifier) {
+            throw new Exception("For TODO");
+        }
     }
 }

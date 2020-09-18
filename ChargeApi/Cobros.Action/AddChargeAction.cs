@@ -16,6 +16,9 @@ namespace Charges.Action {
         }
 
         public virtual async Task<ChargeResponse> Execute(Business.Dtos.Charge newCharge) {
+            if (clientChargeRepository.Get(newCharge.identifier) is ChargeAlreadyExist) 
+                { return new ChargeAlreadyExist(); }
+
             await clientActivityService.NotifyNewCharge ( new ActivityDto { identifier = newCharge.identifier });
             var resultAdd =   await clientChargeRepository.AddCharge(newCharge);
             var identifierDto = new ActivityDto { identifier = newCharge.identifier, AddResult = resultAdd };
@@ -25,8 +28,7 @@ namespace Charges.Action {
             }
             else {
                 return new ChargeResponseKO();
-            }
-            
+            }            
         }
     }
 }

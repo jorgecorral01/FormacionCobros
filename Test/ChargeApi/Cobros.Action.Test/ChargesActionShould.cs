@@ -5,6 +5,7 @@ using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using System.Threading.Tasks;
+using NSubstitute.Extensions;
 
 namespace Charges.Action.Test {
     public class ChargesActionShould {
@@ -50,6 +51,21 @@ namespace Charges.Action.Test {
 
             result.Should().Be(false);
             await clientChargeRepository.Received(1).DeleteCharge(identifier);
+        }
+
+        [Test]
+        public async Task should_return_charge_already_exist_when_try_add_charge_with_exist_identifier() {
+            var addResult = true;
+            Business.Dtos.Charge newCharge = GivenACharge();
+            ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
+            ChargeActivityServiceApiClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
+            var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
+            clientChargeRepository.Get(newCharge.identifier).Returns(new ChargeAlreadyExist());
+
+            var result = await addChargeAction.Execute(newCharge);
+
+            result.Should().BeOfType<ChargeAlreadyExist>();
+            clientChargeRepository.Received(1).Get(newCharge.identifier);
         }
 
         private static ChargeRepositoryServiceApiClient GivenARepositoryApiClientMock() {

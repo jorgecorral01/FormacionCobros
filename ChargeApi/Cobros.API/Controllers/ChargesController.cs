@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Charges.API.swagger;
 using Charges.Business.Dtos;
+using Charges.Business.Exceptions;
 using Cobros.API.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -20,17 +21,17 @@ namespace Cobros.API.Controllers {
             options.Conventions.Controller<ChargesController>().HasApiVersions(ApiVersioning.Versions());
         }
 
-        public ChargesController (ActionFactory actionFactory) {
+        public ChargesController(ActionFactory actionFactory) {
             this.actionFactory = actionFactory;
         }
 
         // POST api/charges
         [HttpPost]
-        public async Task<ActionResult> Post(Charges.Business.Dtos.Charge charge) {           
+        public async Task<ActionResult> Post(Charges.Business.Dtos.Charge charge) {
             bool result = await actionFactory
                 .CreateAddChargeAction()
-                .Execute(charge);            
-            if( result) {
+                .Execute(charge);
+            if(result) {
                 return Ok();
             }
             //return BadRequest("dddddd");
@@ -40,16 +41,22 @@ namespace Cobros.API.Controllers {
         [HttpDelete]
         [Route("charge/{identifier}")]
         public async Task<ActionResult> Delete(string identifier) {
-            bool result = await actionFactory
-                .CreateDeleteChargeAction()
-                .Execute(identifier);
-            if(result) {
-                return Ok();
+            try {
+                bool result = await actionFactory
+                    .CreateDeleteChargeAction()
+                    .Execute(identifier);
+                if(result) {
+                    return Ok();
+                }
+                else {
+                    return NotFound();
+                }
             }
-            else {
-                return NotFound();
+            catch(ChargesException ex) {
+                return BadRequest(ex.Message);
             }
-            
+
+
         }
 
         private class BadRequestError {

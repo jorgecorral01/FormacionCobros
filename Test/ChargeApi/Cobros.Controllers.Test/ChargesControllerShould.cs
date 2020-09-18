@@ -1,5 +1,5 @@
 ﻿using Charges.Action;
-using Charges.Business.Dtos;
+using Charges.Business.Exceptions;
 using Charges.Controllers.Test.mocks;
 using Cobros.API.Controllers;
 using Cobros.API.Factories;
@@ -7,6 +7,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using System;
 using System.Net;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Charges.Controllers.Test {
     [TestFixture]
-    public class ChargesControllerShould {
+    public partial class ChargesControllerShould {
         Business.Dtos.Charge newCharge;
         HttpClient client;
         string identifier = "any identifier";
@@ -54,8 +55,8 @@ namespace Charges.Controllers.Test {
         [Test]
         public async Task given_an_identifier_try_delete_charge_return_ok_response() {            
             var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
-            DeleteChargeAction action = GivenAnDeleteChargeActionMock(true);
-
+            DeleteChargeAction action = GivenAnDeleteChargeActionMock();
+            action.Execute(Arg.Any<string>()).Returns(true);
             var result = await client.DeleteAsync(requestUri);
 
             result.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -65,21 +66,33 @@ namespace Charges.Controllers.Test {
         [Test]
         public async Task given_an_identifier_try_delete_not_exist_charge_return_not_found_response() {           
             var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
-            DeleteChargeAction action = GivenAnDeleteChargeActionMock(false);
-
+            DeleteChargeAction action = GivenAnDeleteChargeActionMock();
+            action.Execute(Arg.Any<string>()).Returns(false);
             var result = await client.DeleteAsync(requestUri);
 
             result.StatusCode.Should().Be(HttpStatusCode.NotFound);
             await action.Received(1).Execute(identifier);
         }
 
-        private DeleteChargeAction GivenAnDeleteChargeActionMock(bool actionResult) {
-            DeleteChargeAction action = Substitute.For<DeleteChargeAction>(new object[] { null });
-            action.Execute(Arg.Any<string>()).Returns(actionResult);
+        [Test]
+        public async Task given_an_identifier_try_delete_and_have_anyproblem_return_badrequest_response() {
+            var requestUri = string.Format("http://localhost:10000/api/charges/charge/{0}", identifier);
+            DeleteChargeAction action = GivenAnDeleteChargeActionMock();
+            action.Execute(Arg.Any<string>()).Throws(new ChargesException("any problem"));
+            var result = await client.DeleteAsync(requestUri);
+
+            result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            var errorMessage = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            errorMessage.Should().Be("any problem");
+            await action.Received(1).Execute(identifier);
+        }
+
+        private DeleteChargeAction GivenAnDeleteChargeActionMock() {
+            DeleteChargeAction action = Substitute.For<DeleteChargeAction>(new object[] { null });            
             ActionsFactoryMock.CreateDeleteChargeAction(action);
             return action;
         }
-
+       
         private static async Task verifyResult(Business.Dtos.Charge newCharge, AddChargeAction action, HttpResponseMessage result) {
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             await action.Received(1).Execute(Arg.Is<Business.Dtos.Charge>(item => item.identifier == newCharge.identifier && item.Amount == newCharge.Amount && item.Description == newCharge.Description));
@@ -105,6 +118,6 @@ namespace Charges.Controllers.Test {
                 Content = content
             };
             return content;
-        }        
+        }
     }
 }

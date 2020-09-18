@@ -12,6 +12,15 @@ namespace HttpApiClient {
             this.httpClient = httpClient;
         }
 
+        public async Task<HttpResponseMessage> DeleteAsync(string requestUri) {
+            try {
+                return await httpClient.DeleteAsync(requestUri);
+            }
+            catch {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+        }
+
         public async Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent) {
             try {
                 return await httpClient.PostAsync(requestUri, httpContent);

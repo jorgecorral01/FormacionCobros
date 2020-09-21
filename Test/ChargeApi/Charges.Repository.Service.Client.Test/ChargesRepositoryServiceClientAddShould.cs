@@ -20,11 +20,12 @@ namespace Charges.Repository.Service.Client.Test {
         [SetUp]
         public void Setup() {            
             identifier = "any identifier";
+            client = GivenAHttpClienMock();
         }
 
         [Test]
         public async Task given_data_for_add_new_charge_we_obtein_a_ok_response_with_true_result() {
-            ReturnOkFor(false);
+            ReturnValueForPostAsync(false);
             string requestUri = "http://localhost:10001/api/charges/add";
             Charge newCharge = GivenACharge();
             var content = GivenAHttpContent(newCharge, requestUri);
@@ -52,7 +53,7 @@ namespace Charges.Repository.Service.Client.Test {
 
         [Test]
         public async Task given_an_identifier_try_delete_charge_return_not_found_if_charge_dont_exist() {            
-            ReturnNotFoundFor();
+            ReturnNotFoundForDelete();
             string requestUri = string.Format("http://localhost:10001/api/charges/charge/{0}", identifier);
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
 
@@ -63,8 +64,8 @@ namespace Charges.Repository.Service.Client.Test {
         }
 
         [Test]
-        public async Task should_return_charge_already_exist_when_try_add_charge_with_exist_identifier() {
-            ReturnOkFor(true);
+        public async Task should_return_charge_already_exist_when_try_add_charge_with_exist_identifier() {            
+            ReturnValueForPostAsync(true);
             string requestUri = "http://localhost:10001/api/charges/add";
             Charge newCharge = GivenACharge();
             var content = GivenAHttpContent(newCharge, requestUri);
@@ -78,12 +79,10 @@ namespace Charges.Repository.Service.Client.Test {
 
         [Test]
         public async Task given_an_existing_identifier_getcharge_return_charge_response_ok() {            
-            string requestUri = string.Format("http://localhost:10001/api/charge/{0}", identifier);
-            client = GivenAHttpClienMock();
-            string jsonVideo = JsonConvert.SerializeObject(new ChargeResponse() { alreadyExist = true }, Formatting.Indented);
-            HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
-            HttpResponseMessage returnThis = new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = content };
-            client.GetAsync(Arg.Any<string>()).Returns(returnThis);
+            string requestUri = string.Format("http://localhost:10001/api/charge/{0}", identifier);            
+            string jsonVideo = SerializeCharge(true);
+            HttpResponseMessage response = CreateResponse(jsonVideo);
+            client.GetAsync(Arg.Any<string>()).Returns(response);
             var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
             
             var result = await chargeRepositoryServiceClient.Get(identifier);
@@ -92,29 +91,34 @@ namespace Charges.Repository.Service.Client.Test {
             await client.Received(1).GetAsync(Arg.Any<string>());
         }
 
-        private void ReturnNotFoundFor() {
-            client = GivenAHttpClienMock();
+        private void ReturnNotFoundForDelete() {            
             client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.NotFound));
         }
-        private void ReturnOkFor(bool alreadyExist) {
-            client = GivenAHttpClienMock();
-            string jsonVideo = JsonConvert.SerializeObject(new ChargeResponse() { alreadyExist = alreadyExist }, Formatting.Indented);
-            HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
-            HttpResponseMessage returnThis = new HttpResponseMessage() {StatusCode = HttpStatusCode.OK, Content = content };
-            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(returnThis);
-            //client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
-        }
         private void ReturnOkForDelete() {
-            client = GivenAHttpClienMock();
             client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.OK));
         }
+        private void ReturnValueForPostAsync(bool alreadyExist) {
+            string jsonVideo = SerializeCharge(alreadyExist);
+            var response = CreateResponse(jsonVideo);
+            client.PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>()).Returns(response);
+        }
+
+        private static HttpResponseMessage CreateResponse(string jsonVideo) {
+            HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
+            HttpResponseMessage returnThis = new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = content };
+            return returnThis;
+        }
+
+        private static string SerializeCharge(bool alreadyExist) {
+            return JsonConvert.SerializeObject(new ChargeResponse() { alreadyExist = alreadyExist }, Formatting.Indented);
+        }
+        
         private static Charge GivenACharge() {
             return new Charge { Description = "Nuevo cobro", Amount = 1000, identifier = "anyIdentifier" };
         }
 
-        private static IHttpApiClient GivenAHttpClienMock() {
-            var client = Substitute.For<IHttpApiClient>();
-            return client;
+        private static IHttpApiClient GivenAHttpClienMock() {            
+            return Substitute.For<IHttpApiClient>(); ;
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

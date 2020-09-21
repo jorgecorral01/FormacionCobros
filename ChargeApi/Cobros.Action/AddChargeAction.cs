@@ -20,7 +20,11 @@ namespace Charges.Action {
                 { return new ChargeAlreadyExist(); }
 
             await clientActivityService.NotifyNewCharge ( new ActivityDto { identifier = newCharge.identifier });
-            var resultAdd =   await clientChargeRepository.AddCharge(newCharge);
+            var resultAddCharge =   await clientChargeRepository.AddCharge(newCharge);
+            bool resultAdd = false;
+            if (resultAddCharge is ChargeResponseOK) { 
+                resultAdd = true;
+            }
             var identifierDto = new ActivityDto { identifier = newCharge.identifier, AddResult = resultAdd };
             var result = await clientActivityService.UpdateNotifyCharge(identifierDto);
             if(result) {

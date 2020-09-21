@@ -21,7 +21,7 @@ namespace Charges.Action.Test {
         public async Task given_data_for_add_new_charge_we_obtein_a_true_response() {
             Business.Dtos.Charge newCharge = GivenACharge();
             var addResult = true;
-            clientChargeRepository.AddCharge(newCharge).Returns(addResult);
+            clientChargeRepository.AddCharge(newCharge).Returns(new ChargeResponseKO());
             ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
             ChargeActivityServiceApiClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);

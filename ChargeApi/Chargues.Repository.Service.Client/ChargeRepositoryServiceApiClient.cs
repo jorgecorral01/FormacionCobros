@@ -17,11 +17,13 @@ namespace Chargues.Repository.Service.Client {
             this.client = client;
         }
 
-        public virtual async Task<bool> AddCharge(Charge newCharge) {            
+        public virtual async Task<ChargeResponse> AddCharge(Charge newCharge) {            
             string requestUri = string.Format("{0}/api/charges/add", server);
             var content = GivenAHttpContent(newCharge, requestUri);            
-            var result = await client.PostAsync(requestUri, content);      
-            if (result.StatusCode  == HttpStatusCode.OK) return true;
+            var result = await client.PostAsync(requestUri, content);
+            ChargeResponse response = JsonConvert.DeserializeObject<ChargeResponse>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+            if (result.StatusCode  == HttpStatusCode.OK && response.alreadyExist) return new ChargeAlreadyExist();
+            if(result.StatusCode == HttpStatusCode.OK && !response.alreadyExist) return new ChargeResponseOK();
             throw new Exception("TODO");
         }
 

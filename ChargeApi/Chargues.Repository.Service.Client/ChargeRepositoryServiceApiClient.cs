@@ -35,6 +35,16 @@ namespace Chargues.Repository.Service.Client {
             throw new Exception("TODO");
         }
 
+        public async virtual Task<ChargeResponse> Get(string identifier) {
+            string requestUri = string.Format("{0}/api/charges/{1}", server, identifier);            
+            var result = await client.GetAsync(requestUri);
+            ChargeResponse response = JsonConvert.DeserializeObject<ChargeResponse>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+            if (response.alreadyExist) {
+                return new ChargeResponseOK();
+            }
+            throw new Exception("TODO");
+        }
+
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {
             string jsonVideo = JsonConvert.SerializeObject(charge2, Formatting.Indented);
             HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
@@ -46,8 +56,5 @@ namespace Chargues.Repository.Service.Client {
             return content;
         }
 
-        public virtual ChargeResponse Get(string identifier) {
-            throw new Exception("For TODO");
-        }
     }
 }

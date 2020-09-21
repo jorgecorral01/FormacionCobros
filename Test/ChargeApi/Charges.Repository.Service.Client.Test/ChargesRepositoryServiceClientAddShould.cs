@@ -76,6 +76,22 @@ namespace Charges.Repository.Service.Client.Test {
             await client.Received(1).PostAsync(Arg.Any<string>(), Arg.Any<HttpContent>());
         }
 
+        [Test]
+        public async Task given_an_existing_identifier_getcharge_return_charge_response_ok() {            
+            string requestUri = string.Format("http://localhost:10001/api/charge/{0}", identifier);
+            client = GivenAHttpClienMock();
+            string jsonVideo = JsonConvert.SerializeObject(new ChargeResponse() { alreadyExist = true }, Formatting.Indented);
+            HttpContent content = new StringContent(jsonVideo, Encoding.UTF8, "application/json");
+            HttpResponseMessage returnThis = new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = content };
+            client.GetAsync(Arg.Any<string>()).Returns(returnThis);
+            var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
+            
+            var result = await chargeRepositoryServiceClient.Get(identifier);
+
+            result.Should().BeOfType<ChargeResponseOK>();
+            await client.Received(1).GetAsync(Arg.Any<string>());
+        }
+
         private void ReturnNotFoundFor() {
             client = GivenAHttpClienMock();
             client.DeleteAsync(Arg.Any<string>()).Returns(new HttpResponseMessage(HttpStatusCode.NotFound));

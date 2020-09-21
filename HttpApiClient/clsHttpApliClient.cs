@@ -21,6 +21,10 @@ namespace HttpApiClient {
             }
         }
 
+        public Task<HttpResponseMessage> GetAsync(string requestUri) {
+            throw new NotImplementedException();
+        }
+
         public async Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent) {
             try {
                 return await httpClient.PostAsync(requestUri, httpContent);

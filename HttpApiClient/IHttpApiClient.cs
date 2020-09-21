@@ -10,6 +10,6 @@ namespace HttpApiClient {
         Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent httpContent);
         Task<HttpResponseMessage> PutAsync(string requestUri, HttpContent content);
         Task<HttpResponseMessage> DeleteAsync(string requestUri);
-        Task<HttpResponseMessage> GetAsync(string v);
+        Task<HttpResponseMessage> GetAsync(string requestUri);
     }
 }

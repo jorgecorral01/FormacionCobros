@@ -10,4 +10,5 @@
     }
 
     public class ChargeAlreadyExist : ChargeResponse { }
+    public class ChargeResponseException : ChargeResponse { }
 }

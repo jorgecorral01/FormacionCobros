@@ -17,12 +17,12 @@ namespace Chargues.Repository.Service.Client {
             this.client = client;
         }
 
-        public virtual async Task<ChargeResponse> AddCharge(Charge newCharge) {            
+        public virtual async Task<ChargeResponse> AddCharge(Charge newCharge) {
             string requestUri = string.Format("{0}/api/charges/add", server);
-            var content = GivenAHttpContent(newCharge, requestUri);            
+            var content = GivenAHttpContent(newCharge, requestUri);
             var result = await client.PostAsync(requestUri, content);
             ChargeResponse response = JsonConvert.DeserializeObject<ChargeResponse>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-            if (result.StatusCode  == HttpStatusCode.OK && response.alreadyExist) return new ChargeAlreadyExist();
+            if(result.StatusCode == HttpStatusCode.OK && response.alreadyExist) return new ChargeAlreadyExist();
             if(result.StatusCode == HttpStatusCode.OK && !response.alreadyExist) return new ChargeResponseOK();
             throw new Exception("TODO");
         }
@@ -36,13 +36,21 @@ namespace Chargues.Repository.Service.Client {
         }
 
         public async virtual Task<ChargeResponse> Get(string identifier) {
-            string requestUri = string.Format("{0}/api/charges/{1}", server, identifier);            
-            var result = await client.GetAsync(requestUri);
-            ChargeResponse response = JsonConvert.DeserializeObject<ChargeResponse>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-            if (response.alreadyExist) {
-                return new ChargeResponseOK();
+            string requestUri = string.Format("{0}/api/charges/{1}", server, identifier);
+            HttpResponseMessage result = null;
+            try {
+                result = await client.GetAsync(requestUri);
+                if(result.StatusCode == HttpStatusCode.OK) {
+                    ChargeResponse response = JsonConvert.DeserializeObject<ChargeResponse>(result.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                    if(response.alreadyExist) {
+                        return new ChargeResponseOK();
+                    }
+                }
+                throw new Exception("TODO");
             }
-            throw new Exception("TODO");
+            catch(Exception ex) {
+                return new ChargeResponseException() { Message = ex.Message };
+            }
         }
 
         private static HttpContent GivenAHttpContent(Charge charge2, string requestUri) {

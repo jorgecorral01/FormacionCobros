@@ -5,6 +5,7 @@ using HttpApiClient;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using System;
 using System.Net;
@@ -88,6 +89,20 @@ namespace Charges.Repository.Service.Client.Test {
             var result = await chargeRepositoryServiceClient.Get(identifier);
 
             result.Should().BeOfType<ChargeResponseOK>();
+            await client.Received(1).GetAsync(Arg.Any<string>());
+        }
+
+        [Test]
+        public async Task when_try_get_a_charge_and_it_occurs_a_exception_we_return_charge_exception_with_message() {
+            string requestUri = string.Format("http://localhost:10001/api/charge/{0}", identifier);
+            string jsonVideo = SerializeCharge(true);
+            HttpResponseMessage response = CreateResponse(jsonVideo);
+            client.GetAsync(Arg.Any<string>()).Throws(new Exception("any exception"));
+            var chargeRepositoryServiceClient = new ChargeRepositoryServiceApiClient(client);
+                        
+            var result = await chargeRepositoryServiceClient.Get(identifier);
+            
+            result.Should().BeOfType<ChargeResponseException>();
             await client.Received(1).GetAsync(Arg.Any<string>());
         }
 

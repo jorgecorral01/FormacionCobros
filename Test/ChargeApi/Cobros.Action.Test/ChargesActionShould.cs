@@ -21,9 +21,11 @@ namespace Charges.Action.Test {
         public async Task given_data_for_add_new_charge_we_obtein_a_true_response() {
             Business.Dtos.Charge newCharge = GivenACharge();
             var addResult = true;
-            clientChargeRepository.AddCharge(newCharge).Returns(new ChargeResponseKO());
-            ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
+            clientChargeRepository.AddCharge(newCharge).Returns(new ChargeResponseOK());
+             ActivityDto activityDto = GivenAnActivity(newCharge.identifier, addResult);
             ChargeActivityServiceApiClient clientActivityService = GivenAMockActivityServiceClient(activityDto);
+            clientActivityService.NotifyNewCharge(Arg.Any<ActivityDto>()).Returns(true); ;
+            clientActivityService.UpdateNotifyCharge(Arg.Any<ActivityDto>()).Returns(true); ;
             var addChargeAction = new AddChargeAction(clientChargeRepository, clientActivityService);
 
             var result = await addChargeAction.Execute(newCharge);
@@ -77,8 +79,7 @@ namespace Charges.Action.Test {
         }
 
         private static ChargeActivityServiceApiClient GivenAMockActivityServiceClient(ActivityDto identifierDto) {
-            var clientActivityService = Substitute.For<ChargeActivityServiceApiClient>(new object[] { null });
-            clientActivityService.UpdateNotifyCharge(Arg.Is<ActivityDto>(item => item.identifier == identifierDto.identifier && item.AddResult == identifierDto.AddResult)).Returns(true);
+            var clientActivityService = Substitute.For<ChargeActivityServiceApiClient>(new object[] { null }); 
             return clientActivityService;
         }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Charge.Activity.Service.Client {
     public partial class ChargeActivityServiceApiClient {
         private IHttpApiClient httpApiClient;
-        private string server = "http://localhost:10002"; //  "172.17.0.3:30761";
+        private string server = "http://localhost:10002"; //  "172.17.0.3:30761"; //TODO
 
 
         public ChargeActivityServiceApiClient(IHttpApiClient httpApiClient) {

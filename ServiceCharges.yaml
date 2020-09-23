@@ -6,7 +6,8 @@ metadata:
     run: charges  
 spec:
   ports:
-  - port: 8090
+  - port: 80
     protocol: TCP
   selector:
     run: charges
+  type: NodePort
